@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_report_wizard" model="ir.ui.view">
+            <field name="name">project.report.wizard</field>
+            <field name="model">project.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Select Type to Generate Report!">
+                      
+                    <sheet>
+                        <group>
+                            <!-- <field name="company_id"/> -->
+                            <field name="report_type"/>
+                            <!-- <field name="brand_id" domain = "[('company_id', '=', company_id)]"/> -->
+                            <field name="engineer_id" attrs="{'invisible':[('report_type', '!=', 'engineer')]}"/>
+                            <field name="time_frame" attrs="{'invisible':[('report_type', '!=', 'engineer')]}"/>
+                            <label for="from_date" string="From" attrs="{'invisible':[('report_type', '!=', 'engineer')]}"/>
+                            <div class="o_row o_row_readonly o_hr_holidays_dates">
+                                <field name="from_date" class="oe_inline"
+                                       attrs="{'required': [('time_frame', '=', True)], 'invisible': [('time_frame', '=', False)]}"/>
+                                <span class="oe_inline"
+                                      attrs="{'invisible': [('time_frame', '=', False)]}">
+                                    To
+                                </span>
+                                <field name="to_date" class="oe_inline"
+                                       attrs="{'required': [('time_frame', '=', True)], 'invisible': [('time_frame', '=', False)]}"
+                                       nolabel="1"/>
+                            </div>
+
+                            <field name="type"/>
+                            <field name="project_id" attrs="{'invisible':[('report_type', '!=', 'project')]}"/>
+                        </group>
+                        
+                    </sheet>
+
+                    <footer>
+                        <button name="print_engineer_wise_report" type="object" string="Print" class="oe_highlight" 
+                                attrs="{'invisible':['|', ('report_type', '!=', 'engineer'), ('engineer_id', '=', False)]}" />
+                        <button name="print_project_wise_report" type="object" string="Print" class="oe_highlight" 
+                                attrs="{'invisible':['|', ('report_type', '!=', 'project'), ('project_id', '=', False)]}"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="print_project_report_action" model="ir.actions.act_window">
+            <field name="name">Project Report</field>
+            <field name="res_model">project.report.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="project_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem parent="project.menu_project_report" 
+                        id="project_report" 
+                        name="Project Report" 
+                        sequence="4" 
+                        action="print_project_report_action"/>
+    </data>
+</odoo>

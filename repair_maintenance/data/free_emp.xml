@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+
+		<record id="free_emp_configuration" model="free.employee">
+			<field name="name">Available Employee Master</field>
+		</record>
+	</data>
+</odoo>

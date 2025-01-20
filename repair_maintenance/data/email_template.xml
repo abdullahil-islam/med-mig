@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="repair_order_request_email_template" model="mail.template">
+            <field name="name">Notification: New Repair Request</field>
+            <field name="model_id" ref="repair.model_repair_order"/>
+            <field name="subject">New Repair Request</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.executive_engineer_id and object.executive_engineer_id.name or ''},
+                <br/>
+                New Repair Order: <b>${object.name}</b><br/>
+                Thank you contact to us for repair request, we will check your request and update you very soon.
+                ]]>
+            </field>
+        </record>
+
+
+        <record id="maintenance_request_engineer_email_template" model="mail.template">
+            <field name="name">Notification: Maintenance Request - Engineer</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Maintenance Request Notification</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${','.join(object.user_ids.mapped('name'))},
+                <br/>
+                <b>1. Request Name:</b> ${object.name or ''}<br/>
+                <b>2. Requestedd By:</b> ${object.owner_user_id and object.owner_user_id.name or ''}<br/>
+                <b>3. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>4. Machine:</b> ${object.equipment_id and object.equipment_id.name or ''}
+	 <b>5. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.schedule_date or ''}<br/>
+                <b>7. Notes:</b> ${object.description or ''}<br/>
+                 <br/>
+                Thank you contact to us for repair request, we will check your request and update you very soon.
+                ]]>
+            </field>
+        </record>
+        <record id="maintenance_request_executive_email_template" model="mail.template">
+            <field name="name">Notification: Maintenance Request - Executive</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Maintenance Request Notification</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.executive_engineer_id and object.executive_engineer_id.name or ''},
+                <br/>
+                <b>Request Name:</b> ${object.name or ''}<br/>
+               <b>Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>Requestedd By:</b> ${object.owner_user_id and object.owner_user_id.name or ''}<br/>
+                <b>Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>Machine:</b> ${object.equipment_id and object.equipment_id.name or ''}
+                <b>Scheduled Date:</b> ${object.schedule_date or ''}<br/>
+                <b>Notes:</b> ${object.description or ''}<br/>
+                <br/>
+                Thank you contact to us for repair request, we will check your request and update you very soon.
+                ]]>
+            </field>
+        </record>
+        <record id="maintenance_request_teamhead_email_template" model="mail.template">
+            <field name="name">Notification: Maintenance Request- Team Head</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Maintenance Request Notification</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.team_head_id and object.team_head_id.name or ''},
+                <br/>
+                <b>Request Name:</b> ${object.name or ''}<br/>
+                <b>Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>Requestedd By:</b> ${object.owner_user_id and object.owner_user_id.name or ''}<br/>
+                <b>Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>Machine:</b> ${object.equipment_id and object.equipment_id.name or ''}
+                <b>Scheduled Date:</b> ${object.schedule_date or ''}<br/>
+                <b>Notes:</b> ${object.description or ''}<br/>
+                <br/>
+                Thank you contact to us for repair request, we will check your request and update you very soon.
+                ]]>
+            </field>
+        </record>
+
+        <!-- Reminder: Email template for Maintenance -->
+        <record id="email_template_maintenance_request_engineer" model="mail.template">
+            <field name="name">Reminder: Maintenance Request - Engineer</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Maintenance Request Reminder</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                 <![CDATA[
+                Dear ${object.team_head_id and object.team_head_id.name or ''},<br/>
+                This is a reminder for maintenance request.
+                <h3><b>Name:</b> ${object.name or ''}</h3>
+                <b>1. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>2. Product/Machine:</b> ${object.equipment_id and object.equipment_id.name or ''}<br/>
+               <b>3. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>4. Type:</b> ${object.type or ''}<br/>
+                <b>5. Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.schedule_date or ''}<br/>
+                <b>7. Start Maintenance:</b> ${ctx.get('start_time')}<br/>
+                <b>8. End Maintenance:</b> ${ctx.get('end_time')}<br/>
+                <b>9. Duration of Task:</b> ${object.duration_of_task or ''}<br/>
+                <b>10. Responsible:</b>  ${','.join(object.user_ids.mapped('name'))}<br/>
+                <b>11. Team Head:</b> ${object.team_head_id and object.team_head_id.name or ''}<br/>
+                <b>12. EDE:</b> ${object.executive_engineer_id and object.executive_engineer_id.name or ''}<br/>
+                <b>13. Requested By:</b> ${object.employee_id and object.employee_id.name or ''}<br/>
+                <b>14. Service/Spare Parts Reference:</b> ${object.parts_reference or ''}<br/>
+                <b>15. Notes:</b> ${object.description or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+        <record id="email_template_maintenance_request_teamhead" model="mail.template">
+            <field name="name">Reminder: Maintenance Request - Team Head</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Maintenance Request Reminder</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.team_head_id and object.team_head_id.name or ''},<br/>
+                This is a reminder for maintenance request.
+                <h3><b>Name:</b> ${object.name or ''}</h3>
+                <b>1. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>2. Product/Machine:</b> ${object.equipment_id and object.equipment_id.name or ''}<br/>
+                <b>3. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>4. Type:</b> ${object.type or ''}<br/>
+                <b>5. Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.schedule_date or ''}<br/>
+                <b>7. Start Maintenance:</b> ${ctx.get('start_time')}<br/>
+                <b>8. End Maintenance:</b> ${ctx.get('end_time')}<br/>
+                <b>9. Duration of Task:</b> ${object.duration_of_task or ''}<br/>
+                <b>10. Responsible:</b>  ${','.join(object.user_ids.mapped('name'))}<br/>
+                <b>11. Team Head:</b> ${object.team_head_id and object.team_head_id.name or ''}<br/>
+                <b>12. EDE:</b> ${object.executive_engineer_id and object.executive_engineer_id.name or ''}<br/>
+                <b>13. Requested By:</b> ${object.employee_id and object.employee_id.name or ''}<br/>
+                <b>14. Service/Spare Parts Reference:</b> ${object.parts_reference or ''}<br/>
+                <b>15. Notes:</b> ${object.description or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+        <record id="email_template_machine_service_status" model="mail.template">
+            <field name="name">Machine: Service Status</field>
+            <field name="email_from">${(object.company_id.email)}</field>
+            <field name="email_to">recovery@medionicsbd.com</field>
+            <field name="subject">Machine Service Status Will Change After One Month</field>
+            <!--<field name="partner_to">${object.partner_id.id}</field>-->
+            <field name="model_id" ref="repair_maintenance.model_maintenance_equipment"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.name or ''},<br/>
+                <b>Name Of Equipment:</b> ${object.name_of_equipment or ''}<br/>
+                <b>Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>Employee:</b> ${object.employee_id and object.employee_id.name or ''}<br/>
+                <b>Machine Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>Type:</b> ${object.type or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+        <record id="team_head_email_template" model="mail.template">
+            <field name="name">Team head Mail</field>
+            <field name="email_from">${(object.company_id.email)}</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Schedule Team head</field>
+            <field name="partner_to">${object.team_head_id.partner_id.id}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.team_head_id and object.team_head_id.name or ''},
+                <br/>
+                <b>Request Name:</b> ${object.name or ''}<br/>
+                <b>Requestedd By:</b> ${object.owner_user_id and object.owner_user_id.name or ''}<br/>
+                <b>Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>Machine:</b> ${object.equipment_id and object.equipment_id.name or ''}
+                <b>Scheduled Date:</b> ${object.schedule_date or ''}<br/>
+                <b>Notes:</b> ${object.description or ''}<br/>
+                <br/>
+                Thank.
+                ]]>
+            </field>
+        </record>
+
+        <record id="responsible_email_template" model="mail.template">
+            <field name="name">Responsible Mail</field>
+            <field name="email_from">${(object.company_id.email)}</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="subject">Schedule Responsible</field>
+            <!--<field name="partner_to">${object.user_id.partner_id.id}</field>-->
+            <!--<field name="partner_to">${','.join(object.user_ids.mapped('name'))}</field>-->
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${','.join(object.user_ids.mapped('name'))},
+                <br/>
+                <b>Request Name:</b> ${object.name or ''}<br/>
+                <b>Requestedd By:</b> ${object.owner_user_id and object.owner_user_id.name or ''}<br/>
+                <b>Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>Machine:</b> ${object.equipment_id and object.equipment_id.name or ''}
+                <b>Scheduled Date:</b> ${object.schedule_date or ''}<br/>
+                <b>Notes:</b> ${object.description or ''}<br/>
+                <br/>
+                Thank.
+                ]]>
+            </field>
+        </record>
+
+        <record id="new_equipment_email_template" model="mail.template">
+            <field name="name">New Equipment</field>
+            <field name="email_from">${(object.company_id.email)}</field>
+            <field name="email_to">it@medionicsbd.com</field>
+            <field name="model_id" ref="project.model_project_task"/>
+            <field name="subject">Request to Add New Equipment</field>
+            <!-- <field name="partner_to">${object.user_id.partner_id.id}</field> -->
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ,<br/>
+                You are assigned a new task in this project.<br/>
+                <b>1. Project Name:</b> ${object.project_id and object.project_id.name or ''}<br/>
+                <b>2. Task Name:</b> ${object.name or ''}<br/>
+                <b>3. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>4. Assigning Date:</b> ${object.date_assign or ''}<br/>
+                <b>5. Start Task:</b> ${ctx.get('start_time')}<br/>
+                <b>6. End Task:</b> ${ctx.get('end_time')}<br/>
+                <b>7. Duration of Task:</b> ${object.duration_of_task or ''}<br/>
+                <b>8. Assigned To:</b> ${','.join(object.user_ids.mapped('name'))}<br/>
+                <b>9. Description:</b> ${object.description or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+
+        <record id="new_repair_star_email_template" model="mail.template">
+            <field name="name">Repair Start</field>
+            <field name="email_from">${(object.company_id.email)}</field>
+            <field name="email_to">repair-notify@medionicsbd.com</field>
+            <field name="model_id" ref="repair.model_repair_order"/>
+            <field name="subject">Till Now Under Repair</field>
+            <!--<field name="partner_to">${object.executive_engineer_id.id}</field>-->
+            <field name="auto_delete" eval="False   "/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ,<br/>
+                This is a reminder for repair order.<br/>
+                <h3><b>Name:</b> ${object.name or ''}</h3>
+                <b>1. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>2. Product/Machine:</b> ${object.product_id and object.product_id.name or ''}<br/>
+                <b>3. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>4. Type:</b> ${object.type or ''}<br/>
+                <b>5. Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.scheduled_date or ''}<br/>
+                <b>7. Start Repair:</b> ${ctx.get('start_time')}<br/>
+                <b>8. End Repair:</b> ${ctx.get('end_time')}<br/>
+                <b>9. Duration of Repair:</b> ${object.duration_of_repair or ''}<br/>
+                <b>10. Responsible Engr:</b> ${','.join(object.technician_id.mapped('name'))}<br/>
+                <b>11. Support Engr:</b> ${','.join(object.inloop_ids.mapped('name'))}<br/>
+                <b>12. Team Head:</b> ${object.team_head_id and object.team_head_id.name or ''}<br/>
+                <b>13. EDE:</b> ${object.executive_engineer_id and object.executive_engineer_id.name or ''}<br/>
+                <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
+                <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
+                <b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
+	<b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+        <record id="new_repair_end_email_template" model="mail.template">
+            <field name="name">Repair End</field>
+            <field name="email_from">${(object.company_id.email)}</field>
+            <field name="email_to">repair-notify@medionicsbd.com</field>
+            <field name="model_id" ref="repair.model_repair_order"/>
+            <field name="subject">Repaired Done</field>
+            <!--<field name="partner_to">${object.executive_engineer_id.id}</field>-->
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ,<br/>
+                This is a reminder for repair order.<br/>
+                <h3><b>Name:</b> ${object.name or ''}</h3>
+                <b>1. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>2. Product/Machine:</b> ${object.product_id and object.product_id.name or ''}<br/>
+                <b>3. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>4. Type:</b> ${object.type or ''}<br/>
+                <b>5. Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.scheduled_date or ''}<br/>
+                <b>7. Start Repair:</b> ${ctx.get('start_time')}<br/>
+                <b>8. End Repair:</b> ${ctx.get('end_time')}<br/>
+                <b>9. Duration of Repair:</b> ${object.duration_of_repair or ''}<br/>
+                <b>10. Responsible Engr:</b> ${','.join(object.technician_id.mapped('name'))}<br/>
+                <b>11. Support Engr:</b> ${','.join(object.inloop_ids.mapped('name'))}<br/>
+                <b>12. Team Head:</b> ${object.team_head_id and object.team_head_id.name or ''}<br/>
+                <b>13. EDE:</b> ${object.executive_engineer_id and object.executive_engineer_id.name or ''}<br/>
+                <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
+                <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
+               <b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
+	<b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+        <record id="project_task_assigned_email_template" model="mail.template">
+             <field name="name">Project Task Assigned</field>
+            <field name="model_id" ref="project.model_project_task"/>
+            <field name="subject">You have been given the responsibility of this Project Task</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                 <![CDATA[
+                Dear ,<br/>
+                You are assigned a new task in this project.<br/>
+                <b>1. Project Name:</b> ${object.project_id and object.project_id.name or ''}<br/>
+                <b>2. Task Name:</b> ${object.name or ''}<br/>
+                <b>3. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>4. Assigning Date:</b> ${object.date_assign or ''}<br/>
+                <b>5. Start Task:</b> ${ctx.get('start_time')}<br/>
+                <b>6. End Task:</b> ${ctx.get('end_time')}<br/>
+                <b>7. Duration of Task:</b> ${object.duration_of_task or ''}<br/>
+                <b>8. Assigned To:</b> ${','.join(object.user_ids.mapped('name'))}<br/>
+                <b>9. Description:</b> ${object.description or ''}<br/>
+                <b>10. See Task:</b><a href="/web#view_type=form&amp;model=project.task&amp;id=${object.id}" target="_blank" style="color: #875A7B;">Choose the metrics you care about</a><br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+          <!-- Reminder: Email template for Repair -->
+        <record id="email_template_repair_order_engineer" model="mail.template">
+            <field name="name">Reminder: Repair Order - Engineer</field>
+            <field name="model_id" ref="repair.model_repair_order"/>
+            <field name="subject">Repair Order Reminder</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+               <![CDATA[
+                Dear ,<br/>
+                This is a reminder for repair order.<br/>
+                <h3><b>Name:</b> ${object.name or ''}</h3>
+                <b>1. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>2. Product/Machine:</b> ${object.product_id and object.product_id.name or ''}<br/>
+               <b>3. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+                <b>4. Type:</b> ${object.type or ''}<br/>
+                <b>5. Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.scheduled_date or ''}<br/>
+                <b>7. Start Repair:</b> ${ctx.get('start_time')}<br/>
+                <b>8. End Repair:</b> ${ctx.get('end_time')}<br/>
+                <b>9. Duration of Repair:</b> ${object.duration_of_repair or ''}<br/>
+                <b>10. Responsible Engr:</b> ${','.join(object.technician_id.mapped('name'))}<br/>
+                <b>11. Support Engr:</b> ${','.join(object.inloop_ids.mapped('name'))}<br/>
+                <b>12. Team Head:</b> ${object.team_head_id and object.team_head_id.name or ''}<br/>
+                <b>13. EDE:</b> ${object.executive_engineer_id and object.executive_engineer_id.name or ''}<br/>
+                <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
+                <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
+	<b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
+               <b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+        <record id="email_template_repair_order_teamhead" model="mail.template">
+            <field name="name">Reminder: Repair Order - Team Head</field>
+            <field name="model_id" ref="repair.model_repair_order"/>
+            <field name="subject">Repair Order Reminder</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+              <![CDATA[
+                Dear ,<br/>
+                This is a reminder for repair order.<br/>
+                <h3><b>Name:</b> ${object.name or ''}</h3>
+                <b>1. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>2. Product/Machine:</b> ${object.product_id and object.product_id.name or ''}<br/>
+                <b>3. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+ 	 <b>4. Type:</b> ${object.type or ''}<br/>
+                <b>5. Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.scheduled_date or ''}<br/>
+                <b>7. Start Repair:</b> ${ctx.get('start_time')}<br/>
+                <b>8. End Repair:</b> ${ctx.get('end_time')}<br/>
+                <b>9. Duration of Repair:</b> ${object.duration_of_repair or ''}<br/>
+                <b>10. Responsible Engr:</b> ${','.join(object.technician_id.mapped('name'))}<br/>
+                <b>11. Support Engr:</b> ${','.join(object.inloop_ids.mapped('name'))}<br/>
+                <b>12. Team Head:</b> ${object.team_head_id and object.team_head_id.name or ''}<br/>
+                <b>13. EDE:</b> ${object.executive_engineer_id and object.executive_engineer_id.name or ''}<br/>
+                <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
+                <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
+	<b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
+                 <b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+                Thanks.
+                ]]>
+            </field>
+        </record>
+
+          <record id="new_passport_expiry_date_email_template" model="mail.template">
+            <field name="name">Update Passport Expiry</field>
+            <field name="email_from">${(object.company_id.email)}</field>
+            <!--<field name="email_to"></field>-->
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="subject">Update Passport Expiry</field>
+            <field name="auto_delete" eval="False   "/>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.name},<br/>
+                Your Passport will going expired at ${object.pass_exp_date or ''} date.
+                So kindly update your passport before expired.<br/>
+
+                Thanks & Regards,<br/>
+                ${(object.company_id.name)}
+                ]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

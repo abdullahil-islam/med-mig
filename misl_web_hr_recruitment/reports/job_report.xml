@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="paperformat_job_application_report" model="report.paperformat">
+        <field name="name">Job Application Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">16</field>
+        <field name="margin_bottom">16</field>
+        <field name="margin_left">16</field>
+        <field name="margin_right">16</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">40</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="job_application" model="ir.actions.report">
+        <field name="name">Job Application Form</field>
+        <field name="model">hr.applicant</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">misl_web_hr_recruitment.report_job_application</field>
+        <field name="report_file">misl_web_hr_recruitment.report_job_application</field>
+        <field name="print_report_name">Job Application</field>
+        <field name="binding_model_id" ref="misl_web_hr_recruitment.model_hr_applicant"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="misl_web_hr_recruitment.paperformat_job_application_report"/>
+        <field name="print_report_name">'Job Application-%s' % (object.name if object.name else '')</field>
+    </record>
+</odoo>

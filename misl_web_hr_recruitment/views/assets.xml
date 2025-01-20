@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" name="recruitment assets" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+<!--            <script type="text/javascript" src="misl_web_hr_recruitment/static/src/js/website_hr_recruitment_editor.js"></script>-->
+            <script type="text/javascript" src="misl_web_hr_recruitment/static/src/js/job_application_data.js"></script>
+            <link rel="stylesheet" type="text/scss" href="/misl_web_hr_recruitment/static/src/scss/website_sale_form.scss"/>
+        </xpath>
+    </template>
+</odoo>

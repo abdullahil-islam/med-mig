@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_engineer_wise_task_list">
+            <!-- <t t-foreach="docs" t-as="o"> -->
+            <t t-call="misl_reports.report_engineer_wise_task_list_document"/>
+            <!-- </t> -->
+        </template>
+
+        <template id="report_engineer_wise_task_list_document">
+            <t t-call="web.html_container">
+                <t t-call="misl_reports.non_web_delivery_external_layout">
+                    <div class="row">
+                        <div class="col-6">
+                            <span t-attf-style="font-weight:bold;">Engineer:</span>
+                            <span>
+                                <t t-esc="engineer_id.name"/>
+                            </span>
+                        </div>
+
+                        <div class="col-6">
+                            <span t-attf-style="font-weight:bold;">Project Status:</span>
+                            <span>
+                                <t t-esc="project_type"/>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <t t-if="start_date or end_date">
+                        <div class="row">
+                            <div class="col-6">
+                                <span t-attf-style="font-weight:bold;">From:</span>
+                                <span>
+                                    <t t-esc="start_date"/>
+                                </span>
+                            </div>
+
+                            <div class="col-6">
+                                <span t-attf-style="font-weight:bold;">To:</span>
+                                <span>
+                                    <t t-esc="end_date"/>
+                                </span>
+                            </div>
+
+                        </div>
+                    </t>
+                    <t t-set="i" t-value="1"/>
+                    <table class="table table-bordered table-sm mt-3" style="border: 1px solid black;">
+                        <thead>
+                            <tr style="border-width: 1px; border-color: black;text-align: center; color:black;">
+                                <th style="border-width: 2px; border-color: gray;text-align: center;">
+                                    SL	
+                                </th>
+                                <th style="border-width: 1px; border-color: black;text-align: center; font-size: 12px;">
+                                    Project Name
+                                </th>
+                                <th style="border-width: 1px; border-color: black;text-align: center; font-size: 12px;">
+                                    Task Name
+                                </th>
+                                <th style="border-width: 1px; border-color: black;text-align: center; font-size: 12px;">
+                                    Stage
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="o">
+                                <tr>
+                                    <td style="border-width: 2px; border-color: gray; text-align: center">
+                                        <span t-esc="i"/>
+                                        <t t-set="i" t-value="i+1" />
+                                    </td>
+                                    <td style="border-width: 1px; border-color: black;">
+                                        <span t-esc="o['project']"/>
+                                    </td>
+                                    <td style="border-width: 1px; border-color: black;">
+                                        <span t-esc="o['task']"/>
+                                    </td>
+                                    <td style="border-width: 1px; border-color: black;">
+                                        <span t-esc="o['stage']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="non_web_delivery_external_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and company.sudo()">
+                    <t t-set="company" t-value="company.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+
+            <t t-call="misl_reports.non_web_delivery_external_layout_standard">
+                <t t-raw="0"/>
+            </t>
+        </template>
+
+        <template id="non_web_delivery_external_layout_standard">
+
+            <!-- support for custom header -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <div t-attf-class="header o_company_#{company.id}_layout">
+                <t t-call="misl_reports.header_non_web_delivery" t-lang="lang"/>
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout">
+                <t t-raw="0"/>
+            </div>
+
+        </template>
+
+        <template id="header_non_web_delivery">
+            <header t-attf-style="font-family: 'Times New Roman';">
+                <div class="row d-flex justify-content-center" style="width: 100%;">
+                    <span>
+                        <div t-attf-style="text-align: center; font-weight:bold; font-size: 20px;">
+                            <t t-esc="company.name" />
+                        </div>
+                        <div t-attf-class="mb-0" style="text-align: center; font-size: 15px;">
+                            <t t-if="company.street">
+                                <span t-attf-style="font-weight:bold;">Address:</span>
+                                <span t-esc="company.street"/>
+                            </t>
+                            <t t-if="company.street2">
+                                ,
+                                <span t-esc="company.street2"/>
+                            </t>
+                            <t t-if="company.city">
+                                ,
+                                <span t-esc="company.city"/>
+                            </t>
+                            <t t-if="company.state_id">
+                                ,
+                                <span t-esc="company.state_id.name"/>
+                            </t>
+                            <t t-if="company.zip">
+                                ,
+                                <span t-esc="company.zip"/>
+                            </t>
+                            <t t-if="company.country_id">
+                                ,
+                                <span t-esc="company.country_id.name"/>
+                            </t>
+                        </div>
+                        <div style="text-align: center; font-size: 15px; padding-bottom:20px;">
+                            <span>Phone No:</span>
+                            <span t-if="company.phone" t-esc="company.phone"/>
+
+                            <span style="padding-left:5px">Email :</span>
+                            <span t-if="company.email" t-esc="company.email"/>
+                        </div>
+
+
+                    </span>
+                </div>
+
+            </header>
+        </template>
+    </data>
+</odoo>

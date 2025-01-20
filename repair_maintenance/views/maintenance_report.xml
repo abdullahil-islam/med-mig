@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_maintenance_request">
+    <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <style>
+                th
+                {
+                    border: 1px solid;
+                    text-align: center;
+                }
+                td
+                {
+                    border: 1px solid;
+                    text-align: center;
+                }
+            </style>
+            <div class="page">
+                <t t-if="data['form']['based_on'] == 'customer'">
+                    <center><h4>Customer Wise Report</h4></center>
+                </t>
+                <t t-if="data['form']['based_on'] == 'machine'">
+                    <center><h4>Machine Wise Report</h4></center>
+                </t>
+                <t t-if="data['form']['based_on'] == 'engineer'">
+                    <center><h4>Engineer Wise Report</h4></center>
+                </t>
+                <br/><br/>
+                <table width="70%">
+                    <tr>
+                        <th width="20%">Start Date:</th>
+                        <th width="20%">End Date:</th>
+                        <t t-if="data['form']['based_on'] == 'customer'"><th width="30%">Customer:</th></t>
+                        <t t-if="data['form']['based_on'] == 'machine'"><th width="30%">Machine:</th></t>
+                        <t t-if="data['form']['based_on'] == 'engineer'"><th width="30%">Engineer:</th></t>
+                        <th>Count:</th>
+                    </tr>
+                    <tr>
+                        <td width="25%"><span t-esc="data['form']['from_date']"/></td>
+                        <td width="25%"><span t-esc="data['form']['to_date']"/></td>
+                        <t t-if="data['form']['based_on'] == 'customer' and data['form']['partner_id']">
+                            <td width="50%"><span t-esc="data['form']['partner_id'][1]"/></td>
+                        </t>
+                        <t t-if="data['form']['based_on'] == 'machine' and data['form']['product_id']">
+                            <td width="50%"><span t-esc="data['form']['product_id'][1]"/></td>
+                        </t>
+                        <t t-if="data['form']['based_on'] == 'engineer' and data['form']['technician_id']">
+                            <td width="50%"><span t-esc="get_customer_count(data)"/></td>
+                        </t>
+                        <t t-if="data['form']['based_on'] == 'customer' and data['form']['partner_id']">
+                            <td width="50%"><span t-esc="get_customer_count(data)"/></td>
+                        </t>
+                        <t t-if="data['form']['based_on'] == 'machine' and data['form']['product_id']">
+                            <td width="50%"><span t-esc="get_machine_count(data)"/></td>
+                        </t>
+                        <t t-if="data['form']['based_on'] == 'engineer' and data['form']['technician_id']">
+                            <td width="50%"><span t-esc="get_engineer_count(data)"/></td>
+                        </t>
+                    </tr>
+                </table>
+                <br/>
+                <table width="100%">
+                    <t t-if="data['form']['based_on'] == 'customer'">
+                        <tr>
+                            <th width="25%">Serial</th>
+                            <th width="25%">Machine</th>
+                            <th width="25%">Service Type</th>
+                            <th width="25%">Validity</th>
+                        </tr>
+                        <tr t-foreach="get_customer_datas(data)" t-as="customer_data">
+                            <td width="25%"><span t-esc="customer_data.get('serial_number')"/></td>
+                            <td width="25%"><span t-esc="customer_data.get('product')"/></td>
+                            <td width="25%"><span t-esc="customer_data.get('type')"/></td>
+                            <td width="25%"><span t-esc="customer_data.get('valid_from')"/> - <span t-esc="customer_data.get('valid_to')"/></td>
+                        </tr>
+                    </t>
+                    <t t-if="data['form']['based_on'] == 'machine'">
+                        <tr>
+                            <th width="25%">Serial</th>
+                            <th width="25%">Customer</th>
+                            <th width="25%">Service Type</th>
+                            <th width="25%">Validity</th>
+                        </tr>
+                        <tr t-foreach="get_machine_datas(data)" t-as="machine_data">
+                            <td width="25%"><span t-esc="machine_data.get('serial_number')"/></td>
+                            <td width="25%"><span t-esc="machine_data.get('partner')"/></td>
+                            <td width="25%"><span t-esc="machine_data.get('type')"/></td>
+                            <td width="25%"><span t-esc="machine_data.get('valid_from')"/> - <span t-esc="machine_data.get('valid_to')"/></td>
+                        </tr>
+                    </t>
+                    <t t-if="data['form']['based_on'] == 'engineer'">
+                        <tr>
+                            <th width="20%">Serial</th>
+                            <th width="20%">Machine</th>
+                            <th width="20%">Customer</th>
+                            <th width="20%">Service Type</th>
+                            <th width="20%">Visit Date</th>
+                        </tr>
+                        <tr t-foreach="get_engineer_datas(data)" t-as="enginner_data">
+                            <td width="20%"><span t-esc="enginner_data.get('serial_number')"/></td>
+                            <td width="20%"><span t-esc="enginner_data.get('product')"/></td>
+                            <td width="20%"><span t-esc="enginner_data.get('partner')"/></td>
+                            <td width="20%"><span t-esc="enginner_data.get('type')"/></td>
+                            <td width="20%"><span t-esc="enginner_data.get('visit_date')" t-field-options="{&quot;format&quot;: &quot;dd/MM/yy&quot;}"/></td>
+                        </tr>
+                    </t>
+                </table>
+            </div>
+        </t>
+    </t>
+</template>
+</odoo>

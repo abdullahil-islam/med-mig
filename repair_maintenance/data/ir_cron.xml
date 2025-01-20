@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <!--Scheduler for Auto send an email to Excutive Eng. & Team Head - Maintenance -->
+    <record model="ir.cron" id="auto_email_maintenance">
+        <field name="name">Auto Notify to Head &amp; Executive od Engineer</field>
+        <field name="model_id" ref="model_maintenance_request"/>
+        <field name="state">code</field>
+        <field name="code">model._notify_teamhead_executive()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+    <record id="to_date_requests_cron_actions" model="ir.cron">
+        <field name="name">Maintenance Equipment Online</field>
+        <field name="model_id" ref="model_maintenance_equipment"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_to_date_requests()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+    <record id="to_date_service_status_actions" model="ir.cron">
+        <field name="name">Machine: Service</field>
+        <field name="model_id" ref="model_maintenance_equipment"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_to_date_service_status()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+     <record id="team_head_actions" model="ir.cron">
+        <field name="name">Team head</field>
+        <field name="model_id" ref="model_maintenance_request"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_team_head()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+     <record id="repair_start_actions" model="ir.cron">
+        <field name="name">Repair Start</field>
+        <field name="model_id" ref="model_repair_order"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_repair_start()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+    <!--  <record id="repair_passport_expiry_date_actions" model="ir.cron">
+        <field name="name">Passport Expiry Date Cron</field>
+        <field name="model_id" ref="model_hr_employee"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_passport_expiry_date()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record> -->
+
+</odoo>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <template id="report_project_wise_task_list">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="misl_reports.report_project_wise_task_list_document"/>
+            </t>
+        </template>
+
+        <template id="report_project_wise_task_list_document">
+            <t t-call="web.html_container">
+                <t t-call="misl_reports.project_non_web_delivery_external_layout">
+                    <div class="row">
+                        <div class="col-6">
+                            <span t-attf-style="font-weight:bold;">Project:</span>
+                            <span>
+                                <t t-esc="o.name"/>
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <span t-attf-style="font-weight:bold;">Project Status:</span>
+                            <span>
+                                <t t-esc="'Running' if o.complete_project == False else 'Done'"/>
+                            </span>
+                        </div>
+
+                    </div>
+                  <table class="table table-bordered table-sm" style="border: 1px solid black;">
+                    <thead>
+                        <tr style="border-width: 1px; border-color: black;text-align: center; color:black;">
+                            <th style="border-width: 1px; border-color: black;text-align: center; font-size: 12px;">
+                                Task Name
+                            </th>
+                            <th style="border-width: 1px; border-color: black;text-align: center; font-size: 12px;">
+                                Assigned To
+                            </th>
+                            <th style="border-width: 1px; border-color: black;text-align: center; font-size: 12px;">
+                                Stage
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.get_project_wise_task_list()" t-as="line">
+                            <tr>
+                                <td style="border-width: 1px; border-color: black;">
+                                  <span t-esc="line['task_name']"/>
+                                </td>
+                                <td style="border-width: 1px; border-color: black;">
+                                  <span t-esc="line['assigned_to']"/>
+                                </td>
+                                <td style="border-width: 1px; border-color: black;">
+                                    <span t-esc="line['stage']"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="project_non_web_delivery_external_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+
+            <t t-call="misl_reports.project_non_web_delivery_external_layout_standard">
+                <t t-raw="0"/>
+            </t>
+        </template>
+
+        <template id="project_non_web_delivery_external_layout_standard">
+
+            <!-- support for custom header -->
+            <div t-attf-class="header o_company_#{company.id}_layout">
+                <t t-call="misl_reports.project_header_non_web_delivery" t-lang="lang"/>
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+                 t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+
+        </template>
+
+        <template id="project_header_non_web_delivery">
+            <header t-attf-style="font-family: 'Times New Roman';">
+                <div class="row d-flex justify-content-center" style="width: 100%;">
+                    <span>
+                        <div t-attf-style="text-align: center; font-weight:bold; font-size: 20px;">
+                                <t t-esc="o.company_id.name" />
+                        </div>
+                        <div t-attf-class="mb-0" style="text-align: center; font-size: 15px;">
+                            <t t-if="o.company_id.street">
+                                <span t-attf-style="font-weight:bold;">Address:</span>
+                                <span t-esc="o.company_id.street"/>
+                            </t>
+                            <t t-if="o.company_id.street2">
+                                ,
+                                <span t-esc="o.company_id.street2"/>
+                            </t>
+                            <t t-if="o.company_id.city">
+                                ,
+                                <span t-esc="o.company_id.city"/>
+                            </t>
+                            <t t-if="o.company_id.state_id">
+                                ,
+                                <span t-esc="o.company_id.state_id.name"/>
+                            </t>
+                            <t t-if="o.company_id.zip">
+                                ,
+                                <span t-esc="o.company_id.zip"/>
+                            </t>
+                            <t t-if="o.company_id.country_id">
+                                ,
+                                <span t-esc="o.company_id.country_id.name"/>
+                            </t>                                                          
+                        </div>
+                        <div style="text-align: center; font-size: 15px; padding-bottom:20px;">
+                            <span>Phone No:</span>
+                            <span t-if="o.company_id.phone" t-esc="o.company_id.phone"/>
+                        
+                            <span style="padding-left:5px">Email :</span>
+                            <span t-if="o.company_id.email" t-esc="o.company_id.email"/>
+                        </div>
+                        
+
+                        
+                    </span>
+                </div>
+                
+            </header>
+        </template>
+    </data>
+</odoo>

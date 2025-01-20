@@ -1,0 +1,104 @@
+//.oe_misl_web_form {
+//   box-sizing: border-box;
+//   // width: 733px;
+//   // height: 490px;
+//   //background: #35979C;
+//   border-radius: 5px;
+//   margin-bottom: 20px;
+//   border-top-right-radius: 8px;
+//  padding:10px;
+//  border: 1px solid black;
+//}
+
+.oe_misl_web_form {
+   box-sizing: border-box;
+   // width: 733px;
+   // height: 490px;
+   //background: #35979C;
+   border-radius: 5px;
+   margin-bottom: 20px;
+   border-top-right-radius: 8px;
+  padding:10px;
+  border: 1px solid black;
+   position: relative;
+}
+
+.oe_misl_times {
+
+   padding: 8px;
+   gap: 8px;
+   font-size: 25px;
+   width: 35px;
+   height: 35px;
+
+   background: #000055;
+   //background: #FF0E0E;
+   border-radius: 30%;
+   position: absolute;
+   right: 0;
+   top: 0;
+
+   i {
+      position: relative;
+      top: -10px;
+      color: gold;
+      cursor: pointer !important;
+   }
+}
+.oe_misl_times_ref {
+   gap: 8px;
+   position: absolute;
+   font-size: 25px;
+   width: 35px;
+   height: 35px;
+   background: #000055;
+   //background: #FF0E0E;
+   border-radius: 30%;
+   right: 0;
+   top: 0;
+   
+   i {
+      position: relative;
+      top: -3px;
+      color: gold;
+      cursor: pointer !important;
+      padding: 8px;
+      z-index: 99;
+   }
+}
+
+.oe_misl_input_wrapper {
+   display: flex;
+   flex-direction: row;
+   margin-bottom: 20px;
+}
+
+.oe_misl_input_box {
+    position: relative;
+    left: 12px;
+    top: 25px;
+}
+
+.oe_misl_input {
+      width: 185px;
+      height: 25px;
+      left: 34px;
+      top: 73px;
+      background: #F4F3F3;
+      border: 1.2px solid #523636;
+      border-radius: 3px;
+}
+
+.space {
+   margin-left: 15px;
+}
+
+.oe_misl_label {
+   color: #fff;
+   span {
+      font-size: 25px;
+      position: absolute;
+      top: -8px;
+      color: #000055;
+   }
+}

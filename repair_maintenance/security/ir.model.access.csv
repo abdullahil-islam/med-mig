@@ -1,0 +1,33 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+repair.access_repair_user,Repair user,repair.model_repair_order,stock.group_stock_user,1,1,0,0
+access_repair_order_hospital,repair.order.hospital,repair.model_repair_order,repair_maintenance.group_maintenance_hospital_user,1,1,1,0
+access_repair_order_technician,repair.order.technician,repair.model_repair_order,repair_maintenance.group_maintenance_technician,1,1,1,0
+access_repair_order_team_head,repair.order.team_head,repair.model_repair_order,repair_maintenance.group_maintenance_team_head,1,1,1,0
+access_repair_order_executive,repair.order.executive,repair.model_repair_order,repair_maintenance.group_maintenance_executive,1,1,1,0
+access_repair_order_systemadmin,repair.order.systemadmin,repair.model_repair_order,base.group_system,1,1,1,1
+
+access_repair_line_team_head,repair.line.team_head,repair.model_repair_line,repair_maintenance.group_maintenance_team_head,1,1,1,1
+access_repair_line_executive,repair.line.executive,repair.model_repair_line,repair_maintenance.group_maintenance_executive,1,1,1,1
+
+access_repair_fee_team_head,repair.fee.team_head,repair.model_repair_fee,repair_maintenance.group_maintenance_team_head,1,1,1,1
+access_repair_fee_executive,repair.fee.executive,repair.model_repair_fee,repair_maintenance.group_maintenance_executive,1,1,1,1
+
+access_product_product_hospital,product.product.hospital,product.model_product_product,repair_maintenance.group_maintenance_hospital_user,1,0,0,0
+
+maintenance.access_maintenance_system_user,equipment.request system user,maintenance.model_maintenance_request,base.group_user,1,0,0,0
+access_maintenance_technician,equipment.request.technician,maintenance.model_maintenance_request,repair_maintenance.group_maintenance_technician,1,1,0,0
+access_maintenance_team_head,equipment.request.team_head,maintenance.model_maintenance_request,repair_maintenance.group_maintenance_team_head,1,1,1,0
+access_maintenance_executive,equipment.request.executive,maintenance.model_maintenance_request,repair_maintenance.group_maintenance_executive,1,1,1,0
+access_maintenance_systemadmin,equipment.request.systemadmin,maintenance.model_maintenance_request,base.group_system,1,1,1,1
+
+access_res_users_executive,res.users.executive,base.model_res_users,repair_maintenance.group_maintenance_executive,1,1,1,1
+
+access_maintenance_equipment_technician,maintenance.equipment.technician,maintenance.model_maintenance_equipment,repair_maintenance.group_maintenance_technician,1,1,1,0
+access_maintenance_equipment_team_head,maintenance.equipment.team_head,maintenance.model_maintenance_equipment,repair_maintenance.group_maintenance_team_head,1,1,1,0
+access_maintenance_equipment_executive,maintenance.equipment.executive,maintenance.model_maintenance_equipment,repair_maintenance.group_maintenance_executive,1,1,1,0
+access_maintenance_equipment_systemadmin,maintenance.equipment.systemadmin,maintenance.model_maintenance_equipment,base.group_system,1,1,1,1
+
+access_project_task_template,project_task_template.project_task_template,model_project_task_template,project.group_project_user,1,1,1,1
+access_project_task_template_employee,project.task_template,model_project_task_template,project.group_project_user,1,0,0,0
+access_project_task_template_manager,project.task_template,model_project_task_template,project.group_project_manager,1,1,1,1
+access_free_employee,access_free_employee,model_free_employee,base.group_user,1,1,1,1

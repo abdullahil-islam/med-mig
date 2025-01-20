@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_applicant_view_form" model="ir.ui.view" >
+        <field name="name">hr.applicant.view.from</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type_id']" position="after">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
+
+            </xpath>
+            <xpath expr="//field[@name='categ_ids']" position="before">
+                <field name="father_name"/>
+                <field name="fathers_profession"/>
+                <field name="religion"/>
+                <field name="marital_status"/>
+                <field name="place_of_birth"/>
+                <field name="present_address"/>
+                <field name="permanent_address"/>
+                <field name="id_number"/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('oe_button_box')]" position="after">
+                <field name="image" widget="image" class="oe_avatar"/>
+            </xpath>
+
+            <xpath expr="//label[@for='salary_expected']" position="before">
+                <label for="current_salary"/>
+                <div>
+                    <field name="current_salary" class="oe_inline"/>
+                </div>
+            </xpath>
+            <xpath expr = "//field[@name='description']" position = "attributes" > 
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

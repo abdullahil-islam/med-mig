@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Added stage for Maintenance Request -->
+        <record id="stage_0" model="maintenance.stage">
+            <field name="name">Permanent</field>
+            <field name="sequence" eval="5"/>
+            <field name="fold" eval="True"/>
+            <field name="done" eval="True"/>
+        </record>
+
+        <record id="seq_maintenance_equipment_mri" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.mri</field>
+            <field name="prefix">MRI-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_maintenance_equipment_ct" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.ct</field>
+            <field name="prefix">CT-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_xr" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.xr</field>
+            <field name="prefix">XR-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_usg" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.usg</field>
+            <field name="prefix">USG-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_cr" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.cr</field>
+            <field name="prefix">CR-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_fpd" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.fpd</field>
+            <field name="prefix">FPD-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_mam" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.mam</field>
+            <field name="prefix">MAM-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_bmd" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.bmd</field>
+            <field name="prefix">BMD-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_opg" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.opg</field>
+            <field name="prefix">OPG-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_crm" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.crm</field>
+            <field name="prefix">CRM-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_prt" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.prt</field>
+            <field name="prefix">PRT-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_maintenance_equipment_omprt" model="ir.sequence">
+            <field name="name">Maintenance Equipment</field>
+            <field name="code">maintenance.equipment.omprt</field>
+            <field name="prefix">PRTOM-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+
+        <record id="seq_maintenance_request" model="ir.sequence">
+            <field name="name">Maintenance Request</field>
+            <field name="code">maintenance.request</field>
+            <field name="prefix">M/%(day)s/%(month)s/%(y)s/000</field>
+            <field name="padding">2</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+
+        <record id="seq_project_project_mri" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.mri</field>
+            <field name="prefix">MRI-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_project_project_ct" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.ct</field>
+            <field name="prefix">CT-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_xr" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.xr</field>
+            <field name="prefix">XR-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_usg" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.usg</field>
+            <field name="prefix">USG-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_cr" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.cr</field>
+            <field name="prefix">CR-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_fpd" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.fpd</field>
+            <field name="prefix">FPD-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_mam" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.mam</field>
+            <field name="prefix">MAM-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_bmd" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.bmd</field>
+            <field name="prefix">BMD-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_opg" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.opg</field>
+            <field name="prefix">OPG-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_crm" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.crm</field>
+            <field name="prefix">CRM-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_prt" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.prt</field>
+            <field name="prefix">PRT-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!---->
+        <record id="seq_project_project_omprt" model="ir.sequence">
+            <field name="name">Project Project</field>
+            <field name="code">project.project.omprt</field>
+            <field name="prefix">PRTOM-</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="project_task_type_pre_installation" model="project.task.type">
+            <field name="name">Pre-Installation</field>
+        </record>
+
+        <record id="project_task_type_installation" model="project.task.type">
+            <field name="name">Installation</field>
+        </record>
+
+        <record id="project_task_type_post_installation" model="project.task.type">
+            <field name="name">Post Installation</field>
+        </record>
+
+         <record id="project_task_type_hand_over" model="project.task.type">
+            <field name="name">Hand Over</field>
+        </record>
+
+    </data>
+</odoo>

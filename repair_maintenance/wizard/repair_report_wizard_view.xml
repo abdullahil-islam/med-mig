@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_repair_report_form" model="ir.ui.view">
+        <field name="name">repair.report.wizard.form</field>
+        <field name="model">repair.report.wizard</field>
+        <field name="arch" type="xml">
+        <form string="Report Options">
+            <group>
+                <group>
+                    <field name="based_on" widget="radio"/>
+                </group>
+                <group>
+                    <field name="all_partner" attrs="{'invisible': [('based_on', '!=', 'customer')]}"/>
+                    <field name="all_product" attrs="{'invisible': [('based_on', '!=', 'machine')]}"/>
+                    <field name="all_technician" attrs="{'invisible': [('based_on', '!=', 'engineer')]}"/>
+                    <field name="partner_id" attrs="{'required': [('based_on', '=', 'customer'),('all_partner','!=', True)],
+                    'invisible': ['|',('all_partner','=', True),('based_on', '!=', 'customer')]}" domain="[('customer_rank', '=', 1)]"/>
+                    <field name="product_id" attrs="{'required': [('based_on', '=', 'machine'),('all_product','!=', True)],
+                    'invisible': ['|',('all_product','=', True),('based_on', '!=', 'machine')]}"/>
+                    <field name="technician_id" attrs="{'required': [('based_on', '=', 'engineer'),('all_technician','!=', True)],
+                    'invisible': ['|',('all_technician','=', True),('based_on', '!=', 'engineer')]}"/>
+                </group>
+                <group>
+                    <field name="from_date" required="1"/>
+                </group>
+                <group>
+                    <field name="to_date" required="1"/>
+                </group>
+            </group>
+            <footer>
+                <button name="print_report" string="View" type="object" default_focus="1" class="oe_highlight"/>
+                or
+                <button string="Cancel" class="btn btn-secondary" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_repair_report" model="ir.actions.act_window">
+        <field name="name">Reports</field>
+        <field name="res_model">repair.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_repair_report_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_repair_report" id="menu_repair_report"
+            groups="repair_maintenance.group_maintenance_team_head,repair_maintenance.group_maintenance_executive" sequence="37"
+            parent="repair_maintenance.menu_repair_order_main"/>
+</odoo>

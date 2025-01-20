@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="task_assign_viewtotask" model="ir.ui.view">
+        <field name="name">task.wizard.assigntotask</field>
+        <field name="model">task.wizard.assigntotask</field>
+        <field name="arch" type="xml">
+            <form string="Task Assign">
+                <sheet>
+                    <group>
+                        <field name="user_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Assign Task" class="btn-primary" name="action_task_assigntotask" type="object" />
+                    <button string="Cancel" class="btn-primary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+<!--    <act_window-->
+<!--        id="action_task_assigntotask"-->
+<!--        key2="client_action_multi"-->
+<!--        name="Assign Task"-->
+<!--        res_model="task.wizard.assigntotask"-->
+<!--        src_model="project.task"-->
+<!--        view_mode="form"-->
+<!--        target="new"-->
+<!--    />-->
+    <record id="action_task_assigntotask" model="ir.actions.act_window">
+        <field name="name">Assign Task</field>
+        <field name="res_model">task.wizard.assigntotask</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <record id="view_task_form2_inherit" model="ir.ui.view">
+        <field name="model">project.task.template</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="project_id" position="after">
+                <field name="default_stage_id"/>
+                <field name="name_of_equipment"/>
+            </field>
+            <field name="project_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//span[@id='end_button_box']" position="before">
+                <button name="toggle_template"
+                        type="object"
+                        groups="base.group_user"
+                        class="oe_stat_button"
+                        icon="fa-check">
+                    <field name="use_as_template"
+                           widget="boolean_button"
+                           options='{"terminology": "active"}'/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_task_tree2_inherit" model="ir.ui.view">
+        <field name="model">project.task.template</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <field name="project_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="stage_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="user_ids" position="after">
+                <field name="default_stage_id"/>
+                <field name="use_as_template"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="project_task_template_action" model="ir.actions.act_window">
+        <field name="name">Task Template</field>
+        <field name="res_model">project.task.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_task_form2_inherit"/>
+    </record>
+
+    <record id="project_task_template_action_list_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_task_tree2_inherit"/>
+        <field name="act_window_id" ref="project_task_template_action"/>
+    </record>
+
+    <menuitem id="menu_project_config_task_templates"
+              name="Task Templates"
+              parent="project.menu_project_config"
+              action="project_task_template_action" />
+
+</odoo>

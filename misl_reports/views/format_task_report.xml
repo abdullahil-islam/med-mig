@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <record id="paperformat_project_wise_task_report" model="report.paperformat">
+            <field name="name">Project Wise Task Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">73</field>
+            <field name="margin_bottom">40</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="project_wise_task_report" model="ir.actions.report">
+            <field name="name">Project Wise Task Report</field>
+            <field name="model">project.project</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">misl_reports.report_project_wise_task_list</field>
+            <field name="report_file">misl_reports.report_project_wise_task_list</field>
+            <field name="print_report_name">'Project Wise Task Report'</field>
+            <field name="binding_model_id" ref="misl_reports.model_project_project"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="misl_reports.paperformat_project_wise_task_report"/>
+            <field name="print_report_name">'Project Report-%s' % (object.name if object.name else '')</field>
+        </record>
+
+        <!-- <record id="engineer_wise_task_report" model="ir.actions.report">
+            <field name="name">Engineer Wise Task Report</field>
+            <field name="model">project.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">misl_reports.report_engineer_wise_task_list</field>
+            <field name="report_file">misl_reports.report_engineer_wise_task_list</field>
+            <field name="print_report_name">'Engineer Wise Task Report'</field>
+            <field name="binding_model_id" ref="misl_reports.model_project_task"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="misl_reports.paperformat_project_wise_task_report"/>
+        </record> -->
+
+        <report id="engineer_wise_task_report"
+            model="project.report.wizard"
+            string="Engineer Wise Task Report"
+            report_type="qweb-pdf"
+            name="misl_reports.report_engineer_wise_task_list"
+            paperformat="misl_reports.paperformat_project_wise_task_report"
+            menu="False"/>
+    </data>     
+</odoo>

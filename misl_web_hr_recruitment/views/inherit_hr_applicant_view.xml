@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="inherit_hr_applicant_form_extend" model="ir.ui.view">
+        <field name="name">Hr Applicant Form Extend</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page id="experience" string="EMPLOYMENT HISTORY">
+                    <field name="employment_history_ids">
+                        <tree editable= "top">
+                            <field name="work_experiance"/>
+                            <field name="organization_name"/>
+                            <field name="organization_type"/>
+                            <field name="department"/>
+                            <field name="job_location"/>
+                            <field name="major_responsibilities"/>
+                            <field name="organization_address"/>
+                            <field name="from_date"/>
+                            <field name="end_date"/>
+                        </tree>
+                        <form>
+
+                        </form>
+                    </field>
+                </page>
+                <page id="education" string="ACADEMIC EDUCATION PROFILE">
+                    <field name="academic_education_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="group"/>
+                            <field name="passingYear"/>
+                            <field name="grade"/>
+                            <field name="institution"/>
+                        </tree>
+                    </field>
+                </page>
+                <page id="professional_qualification" string="PROFESSIONAL QUALIFICATION">
+                    <field name="professional_qualification_ids">
+                        <tree>
+                            <field name="degree"/>
+                            <field name="award"/>
+                            <field name="duration"/>
+                            <field name="result"/>
+                            <field name="location"/>
+                        </tree>
+                    </field>
+                </page>
+                <page id="training_inforamtion" string="TRAINING INFORMATION">
+                    <field name="training_information_ids">
+                        <tree>
+                            <field name="title"/>
+                            <field name="award"/>
+                            <field name="duration"/>
+                            <field name="result"/>
+                            <field name="location"/>
+                        </tree>
+                    </field>
+                </page>
+                <page id="computer_skill" string="Computer SKILLS">
+                    <group>
+                        <group>
+                            <field name="ms_word"/>
+                            <field name="ms_excel"/>
+                        </group>
+                        <group>
+                            <field name="ms_power_point"/>
+                            <field name="ms_outlook"/>
+                        </group>
+                    </group>
+                    <field name="computer_skill_ids">
+                        <tree>
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                </page>
+                <page id="english_proficiency" string="Proficiency in English">
+                    <field name="english_proficiency_ids">
+                        <tree>
+                            <field name="level"/>
+                            <field name="reading"/>
+                            <field name="writing"/>
+                            <field name="speaking"/>
+                            <field name="listening"/>
+                        </tree>
+                    </field>
+                </page>
+                <page id="extra_curricular_activity_ids" string="Extra-Curricular Activities">
+                    <field name="extra_curricular_activity_ids">
+                        <tree>
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                </page>
+                <page id="employment_referee" string="REFEREES">
+                    <field name="referee_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="organization_name"/>
+                            <field name="mobile"/>
+                            <field name="designation"/>
+                            <field name="organization_phone"/>
+                            <field name="email"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="misl_web_hr_recruitment.report_job_application">
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="misl_reports.project_non_web_delivery_external_layout">
+
+                    <div style="-aw-headerfooter-type:header-primary; clear:both">
+                        <p class="Header" style="text-align:center; border-bottom:0.75pt solid #000000; padding-bottom:1pt; font-size:14pt; -aw-border-bottom:0.5pt single">
+                            <span style="font-family:'Lucida Calligraphy'; font-weight:bold">Job Application Form of Medionics Imaging Ltd.</span>
+                        </p>
+                    </div>
+                    <p>
+                        <span style="-aw-import:ignore"></span>
+                    </p>
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="margin-right:9.35pt; margin-left:9.35pt; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse; float:right">
+                        <tbody>
+                            <tr style="height:161.58pt">
+                                <td style="width:155.58pt; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+                                    <img t-att-src="'data:image/png;base64,%s' % to_text(doc.image)" style="width: 207px; height: 213px; max-width: 100%; max-height: 100%;"/>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="height:101pt;page-break-after: auto; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse;float:left">
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align:middle;width:201.6pt; border-right-style:solid; border-right-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-right:0.5pt single">
+                                    <p style="line-height:105%; font-size:13pt;padding:5.03pt">
+                                        <span style=" align:center; font-family:'Arial Narrow'; font-weight:bold; color:#333333">*Apply for the Post of:</span>
+                                    </p>
+                                </td>
+                                <td style="vertical-align:middle;width:361.85pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single">
+                                    <p style="line-height:105%; font-size:13pt">
+                                        <span t-esc="doc.job_id.name" style="align:center;font-family:'Arial Narrow'; font-weight:bold; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="line-height:105%; font-size:161.58pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="width:770pt;margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td colspan="4" style="page-break-after: auto;width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt;  -aw-border-bottom:0.5pt single">
+                                    <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; color:#333333">PERSONAL INFORMATION</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">First Name: </span>
+                                    </p>
+                                </td>
+                                <td style="width:181.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.first_name" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                                <td style="width:62.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Last Name:</span>
+                                    </p>
+                                </td>
+                                <td style="width:171.55pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.last_name" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="width:770pt; border-top-style:solid; border-top-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:9pt">
+                                        <span style="font-family:'Arial Narrow'; font-style:italic; color:#333333">(If you have a name with more than two parts then the last part of the name should appear in 'Last Name' box and other parts will be in the 'First Name' box).</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Date of Birth:</span>
+                                        <span style="font-family:'Arial Narrow'; color:#333333"></span>
+                                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:spaces"></span>
+                                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:spaces"></span>
+                                        <span style="line-height:105%; font-family:'Arial Narrow'; font-size:9pt; color:#808080">(DD-MM-YYYY)</span>
+                                    </p>
+                                </td>
+                                <td style="width:181.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.date_of_birth" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                                <td style="width:62.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Age:</span>
+                                    </p>
+                                </td>
+                                <td style="width:171.55pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.age" style="font-family:'Arial Narrow'; color:#333333"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Father's Name:</span>
+                                    </p>
+                                </td>
+                                <td colspan="3" style="width:437.1pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.father_name" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="width:267.95pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:9pt">
+                                        <span style="font-family:'Arial Narrow';font-weight:bold; color:#333333">Father's Profession (Present/ Last) position, Name of Organization, Business Type/ Location:</span>
+                                    </p>
+                                </td>
+                                <td colspan="2" style="width:244.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.fathers_profession" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Marital Status: </span>
+                                    </p>
+                                </td>
+                                <td style="width:181.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.marital_status" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                                <td style="width:62.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Religion: </span>
+                                    </p>
+                                </td>
+                                <td style="width:171.55pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.religion" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Mobile:</span>
+                                    </p>
+                                </td>
+                                <td style="width:181.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.partner_phone" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                                <td style="width:62.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">E-mail Address:</span>
+                                    </p>
+                                </td>
+                                <td style="width:171.55pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.email_from" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;padding-bottom:5.03pt  -aw-border-bottom:0.5pt; single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="margin-bottom:0pt; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Place of Birth/ </span>
+                                    </p>
+                                    <p style="margin-bottom:0pt; line-height:105%; font-size:6pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">(Home District)</span>
+                                    </p>
+                                </td>
+                                <td colspan="3" style="width:437.1pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.place_of_birth" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Present Address:</span>
+                                    </p>
+                                </td>
+                                <td colspan="3" style="width:437.1pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.present_address" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Permanent Address:</span>
+                                    </p>
+                                </td>
+                                <td colspan="3" style="width:437.1pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.permanent_address" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="margin-bottom:0pt; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">NID/Birth Certificate/</span>
+                                    </p>
+                                    <p style="margin-bottom:0pt; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Driving License/</span>
+                                    </p>
+                                    <p style="margin-bottom:0pt; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Passport Number</span>
+                                    </p>
+                                </td>
+                                <td colspan="3" style="width:437.1pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.id_number" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:75.55pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Current Salary:</span>
+                                    </p>
+                                </td>
+                                <td style="width:181.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.current_salary" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                                <td style="width:62.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Expected Salary:</span>
+                                    </p>
+                                </td>
+                                <td style="width:171.55pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="line-height:105%; font-size:11pt">
+                                        <span t-esc="doc.salary_expected" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+
+                    </p>
+                    <t t-foreach="doc.employment_history_ids" t-as="eh">
+
+                        <p style="line-height:105%; font-size:3pt">
+                            <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                            <br/>
+                        </p>
+                        <p style="line-height:105%; font-size:3pt">
+                            <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                            <br/>
+                        </p>
+
+
+                        <table cellspacing="0" cellpadding="0" class="TableGrid" style="page-break-inside:avoid;width:770pt;margin-bottom:0pt; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" style="width:770pt; border-style:solid; border-width:0.75pt;  -aw-border:0.5pt single">
+                                        <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                            <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; color:#333333">EMPLOYMENT HISTORY</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:84.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Work Experience:</span>
+                                        </p>
+                                    </td>
+                                    <td colspan="4" style="width:428.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="eh.work_experiance" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:84.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Organization Name:</span>
+                                        </p>
+                                    </td>
+                                    <td colspan="2" style="width:236.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="eh.organization_name" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:70.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Organization Type:</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:99.55pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="eh.organization_type" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:84.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Department:</span>
+                                        </p>
+                                    </td>
+                                    <td colspan="2" style="width:236.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="eh.department" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:70.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Job Location:</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:99.55pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="eh.job_location" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:84.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Major Responsibilities:</span>
+                                        </p>
+                                    </td>
+                                    <td colspan="4" style="width:428.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="eh.major_responsibilities" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:84.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Organization Address:</span>
+                                        </p>
+                                    </td>
+                                    <td colspan="4" style="width:428.05pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="eh.organization_address" style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:84.6pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333;">Position Held</span>
+                                            <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:spaces"></span>
+                                            <span style="line-height:105%; font-family:'Arial Narrow'; font-size:9pt; color:#808080; -aw-import:spaces"></span>
+                                            <span style="line-height:105%; font-family:'Arial Narrow'; font-size:9pt; color:#808080;"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:172.9pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; color:#333333;">From:</span>
+                                            <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:spaces"></span>
+                                            <span t-esc="eh.from_date" style="line-height:105%; font-family:'Arial Narrow'; font-size:9pt; color:#808080;"></span>
+                                        </p>
+                                    </td>
+                                    <td colspan="3" style="width:244.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; color:#333333;">End:</span>
+                                            <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:spaces"></span>
+                                            <span t-esc="eh.end_date" style="line-height:105%; font-family:'Arial Narrow'; font-size:9pt; color:#808080;"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr style="height:0pt">
+                                    <td style="width:94.6pt"></td>
+                                    <td style="width:178.95pt"></td>
+                                    <td style="width:61.85pt"></td>
+                                    <td style="width:80.25pt"></td>
+                                    <td style="width:107.3pt"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+
+                    </p>
+
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="page-break-inside:avoid;width:770pt; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td colspan="5" style="width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt;  -aw-border-bottom:0.5pt single">
+                                    <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; text-transform:uppercase; color:#333333">Academic</span>
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; color:#333333"> EDUCATION PROFILE</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr style="height:13pt">
+                                <td style="width:83pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow';font-weight:bold; color:#333333">Education Level</span>
+                                    </p>
+                                </td>
+                                <td style="width:98.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow';font-weight:bold; color:#333333">Group/Subject/Major</span>
+                                    </p>
+                                </td>
+                                <td style="width:47.4pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow';font-weight:bold; color:#333333">Passing Year</span>
+                                    </p>
+                                </td>
+                                <td style="width:78pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow';font-weight:bold;">Division/Class/Grade</span>
+                                    </p>
+                                </td>
+                                <td style="width:173.5pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow';font-weight:bold;; color:#333333">Name of Institution</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <t t-foreach="doc.academic_education_ids" t-as="ep">
+                                <tr>
+                                    <td style="width:83pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:9pt">
+                                            <span t-esc="ep.name" style="font-family:'Arial Narrow'"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:98.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="ep.group" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:47.4pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="ep.passingYear" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:78pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="ep.grade" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:173.5pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center; line-height:105%; font-size:11pt">
+                                            <span t-esc="ep.institution" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="page-break-inside:avoid;width:770pt; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td colspan="5" style="page-break-inside:avoid;width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt;  -aw-border-bottom:0.5pt single">
+                                    <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; color:#333333">PROFESSIONAL QUALIFICATION: </span>
+                                        <span style="font-family:'Arial Narrow'; font-size:8.5pt; font-weight:bold; color:#333333">(If Any):</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr style="height:15.25pt">
+                                <td style="width:119.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Degree/Certificate Name</span>
+                                    </p>
+                                </td>
+                                <td style="width:101.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Awarding Body</span>
+                                    </p>
+                                </td>
+                                <td style="width:61.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; color:#333333">Duration</span>
+                                    </p>
+                                </td>
+                                <td style="width:61.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Result</span>
+                                    </p>
+                                </td>
+                                <td style="width:155.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Location of Awarding Body</span>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <t t-foreach="doc.professional_qualification_ids" t-as="pq">
+
+                                <tr>
+                                    <td style="width:119.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="pq.degree" class="Strong" style="font-family:'Arial Narrow'; font-weight:normal; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:101.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="pq.award" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:61.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="pq.duration" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:61.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="pq.result" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:155.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center; line-height:105%; font-size:11pt">
+                                            <span t-esc="pq.location" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </tbody>
+                    </table>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="page-break-inside:avoid;width:770pt; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td colspan="5" style="width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt; -aw-border-bottom:0.5pt single">
+                                    <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; color:#333333">TRAINING INFORMATION: </span>
+                                        <span style="font-family:'Arial Narrow'; font-size:8.5pt; font-weight:bold; color:#333333">(If Any):</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr style="height:15.25pt">
+                                <td style="width:119.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Training/Workshop Title</span>
+                                    </p>
+                                </td>
+                                <td style="width:101.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Awarding Body</span>
+                                    </p>
+                                </td>
+                                <td style="width:61.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; color:#333333">Duration</span>
+                                    </p>
+                                </td>
+                                <td style="width:61.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Result</span>
+                                    </p>
+                                </td>
+                                <td style="width:155.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; color:#333333">Location of Training/Workshop</span>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <t t-foreach="doc.training_information_ids" t-as="ti">
+
+                                <tr>
+                                    <td style="width:119.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="ti.title" class="Strong" style="font-family:'Arial Narrow'; font-weight:normal; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:101.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="ti.award" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:61.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="ti.duration" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:61.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center;line-height:105%; font-size:11pt">
+                                            <span t-esc="ti.result" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:155.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center; line-height:105%; font-size:11pt">
+                                            <span t-esc="ti.location" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </tbody>
+                    </table>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="page-break-inside:avoid;width:770pt; margin-bottom:10pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                        <tbody>
+                            <tr style="height:17.5pt">
+                                <td colspan="4" style="width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt;  -aw-border-bottom:0.5pt single">
+                                    <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; color:#333333">Computer SKILLS:</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr style="height:17.5pt">
+                                <td style="width:137.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'">Word Processing</span>
+                                    </p>
+                                </td>
+                                <td style="width:110.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'">Spreadsheet</span>
+                                    </p>
+                                </td>
+                                <td style="width:92.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'">Presentation</span>
+                                    </p>
+                                </td>
+                                <td style="width:164.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'">E-mail</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr style="height:20.05pt">
+                                <td style="width:137.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; font-weight:normal">MS Word</span>
+                                    </p>
+                                </td>
+                                <td style="width:110.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; font-weight:normal">MS Excel</span>
+                                    </p>
+                                </td>
+                                <td style="width:92.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; font-weight:normal">MS Power Point</span>
+                                    </p>
+                                </td>
+                                <td style="width:164.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span class="Strong" style="font-family:'Arial Narrow'; font-weight:normal">MS Outlook</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom-style: solid; border-bottom-width: 0.75pt">
+                                <td style="width:137.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <a name="Check1"></a>
+                                        <t t-if="doc.ms_word">
+                                            <input checked="checked" type="checkbox" name="Check1"/>
+                                        </t>
+                                        <t t-if="not doc.ms_word">
+                                            <input type="checkbox" disabled="disabled"/>
+                                        </t>
+                                    </p>
+                                </td>
+                                <td style="width:110.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <t t-if="doc.ms_excel">
+                                            <input checked="checked" type="checkbox" name="Check1"/>
+                                        </t>
+                                        <t t-if="not doc.ms_excel">
+                                            <input type="checkbox" disabled="disabled"/>
+                                        </t>
+                                    </p>
+                                </td>
+                                <td style="width:92.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <t t-if="doc.ms_power_point">
+                                            <input checked="checked" type="checkbox" name="Check1"/>
+                                        </t>
+                                        <t t-if="not doc.ms_power_point">
+                                            <input type="checkbox" disabled="disabled"/>
+                                        </t>
+                                    </p>
+                                </td>
+                                <td style="width:164.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <t t-if="doc.ms_outlook">
+                                            <input checked="checked" type="checkbox" name="Check1"/>
+                                        </t>
+                                        <t t-if="not doc.ms_outlook">
+                                            <input type="checkbox" disabled="disabled"/>
+                                        </t>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <t t-foreach="doc.computer_skill_ids" t-as="cs">
+                                <tr style="border-bottom-style: solid; border-bottom-width: 0.75pt">
+                                    <td colspan="4" style="width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single">
+                                        <p style="text-align:left; line-height:105%; font-size:11pt">
+                                            <span t-esc="cs.description" />
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </tbody>
+                    </table>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="page-break-inside:avoid;width:770pt; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td colspan="5" style="width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt;  -aw-border-bottom:0.5pt single">
+                                    <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold">Proficiency in English:</span>
+                                        <span style="width:42.35pt; font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; display:inline-block; -aw-tabstop-align:left; -aw-tabstop-pos:139.6pt"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:92.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Level</span>
+                                    </p>
+                                </td>
+                                <td style="width:79.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Reading</span>
+                                    </p>
+                                </td>
+                                <td style="width:92.55pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Writing</span>
+                                    </p>
+                                </td>
+                                <td style="width:106.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Speaking</span>
+                                    </p>
+                                </td>
+                                <td style="width:124.2pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                    <p style="text-align:center; line-height:105%; font-size:11pt">
+                                        <span style="font-family:'Arial Narrow'; font-weight:bold; color:#333333">Listening</span>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <t t-foreach="doc.english_proficiency_ids" t-as="prof">
+                                <tr>
+                                    <td style="page-break-inside:avoid;width:92.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="prof.level" class="Strong" style="font-family:'Arial Narrow'; font-weight:normal; color:#333333">Professional</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:79.35pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="text-align:center; line-height:105%; font-size:11pt">
+                                            <t t-if="prof.reading">
+                                                <input checked="checked" type="checkbox" name="Check1"/>
+                                            </t>
+                                            <t t-if="not prof.reading">
+                                                <input type="checkbox" disabled="disabled"/>
+                                            </t>
+                                        </p>
+
+                                    </td>
+                                    <td style="width:92.55pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="text-align:center; line-height:105%; font-size:11pt">
+                                            <t t-if="prof.writing">
+                                                <input checked="checked" type="checkbox" name="Check1"/>
+                                            </t>
+                                            <t t-if="not prof.writing">
+                                                <input type="checkbox" disabled="disabled"/>
+                                            </t>
+                                        </p>
+                                    </td>
+                                    <td style="width:106.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="text-align:center; line-height:105%; font-size:11pt">
+                                            <t t-if="prof.speaking">
+                                                <input checked="checked" type="checkbox" name="Check1"/>
+                                            </t>
+                                            <t t-if="not prof.speaking">
+                                                <input type="checkbox" disabled="disabled"/>
+                                            </t>
+                                        </p>
+                                    </td>
+                                    <td style="width:124.2pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="text-align:center; line-height:105%; font-size:11pt">
+                                            <t t-if="prof.listening">
+                                                <input checked="checked" type="checkbox" name="Check1"/>
+                                            </t>
+                                            <t t-if="not prof.listening">
+                                                <input type="checkbox" disabled="disabled"/>
+                                            </t>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <table cellspacing="0" cellpadding="0" class="TableGrid" style="width:770pt; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td style="width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt;  -aw-border-bottom:0.5pt single">
+                                    <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold">Extra-Curricular Activities </span>
+                                        <span style="font-family:'Arial Narrow'; font-size:11pt; font-weight:bold">(If Any)</span>
+                                        <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold">:</span>
+                                        <span style="width:1.8pt; font-family:'Arial Narrow'; font-size:13pt; font-weight:bold; display:inline-block"></span>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <t t-foreach="doc.extra_curricular_activity_ids" t-as="eca">
+                                <tr>
+                                    <td style="width:770pt; border-top-style:solid; border-top-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-top:0.5pt single">
+                                        <p style="text-align:left; line-height:105%; font-size:11pt">
+                                            <span t-esc="eca.description" class="Strong" style="font-family:'Arial Narrow'; font-weight:normal; font-style:italic; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <!-- <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p>
+                    <p style="line-height:105%; font-size:3pt">
+                        <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                        <br/>
+                    </p> -->
+
+                    <t t-foreach="doc.referee_ids" t-as="referee">
+                        <p style="line-height:105%; font-size:3pt">
+                            <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                            <br/>
+                        </p>
+                        <p style="line-height:105%; font-size:3pt">
+                            <span style="font-family:'Arial Narrow'; color:#333333; -aw-import:ignore"></span>
+                            <br/>
+                        </p>
+                        <table cellspacing="0" cellpadding="0" class="TableGrid" style="page-break-inside:avoid;width:770pt; margin-bottom:0pt; border:0.75pt solid #000000; -aw-border:0.5pt single; -aw-border-insideh:0.5pt single #000000; -aw-border-insidev:0.5pt single #000000; border-collapse:collapse">
+                            <tbody>
+                                <tr style="height:19.75pt">
+                                    <td colspan="4" style="width:770pt; border-bottom-style:solid; border-bottom-width:0.75pt;  -aw-border-bottom:0.5pt single">
+                                        <p style="padding:5.03pt;margin-bottom:0pt; line-height:12pt; background-color:#d5eaff">
+                                            <span style="font-family:'Arial Narrow'; font-size:13pt; font-weight:bold">REFEREES:</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr style="height:19.75pt">
+                                    <td style="width:70.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold">Name:</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:187.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="referee.name" class="Strong" style="font-family:'Arial Narrow'; font-weight:normal; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:74.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold">Designation:</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:173.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="referee.designation" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr style="height:14.35pt">
+                                    <td style="width:70.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold">Organization Name:</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:187.2pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="referee.organization_name" class="Strong" style="font-family:'Arial Narrow'; font-weight:normal; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:74.7pt; border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold">Organization Phone Number: (Option)</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:173.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-bottom:0.5pt single; -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="referee.organization_phone" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr style="height:22pt">
+                                    <td style="width:70.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold">Mobile:</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:187.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="referee.mobile" style="width:129.45pt; font-family:'Arial Narrow'; display:inline-block; -aw-tabstop-align:left; -aw-tabstop-pos:129.45pt"></span>
+                                        </p>
+                                    </td>
+                                    <td style="width:74.7pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-right:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold">Email Address:</span>
+                                        </p>
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span style="font-family:'Arial Narrow'; font-weight:bold">(Option)</span>
+                                        </p>
+                                    </td>
+                                    <td style="width:173.7pt; border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt;padding-top:5.03pt;  -aw-border-left:0.5pt single; -aw-border-top:0.5pt single">
+                                        <p style="line-height:105%; font-size:11pt">
+                                            <span t-esc="referee.email" class="Strong" style="font-family:'Arial Narrow'; -aw-import:ignore"></span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </t>
+
+                </t>
+
+            </t>
+
+            <!-- <t t-foreach="docs" t-as="doc">
+                First Name: <t t-esc="doc.first_name" />
+                Last Name: <t t-esc="doc.last_name" />
+                Date of Birth: <t t-esc="doc.date_of_birth" />
+                Age: <t t-esc="doc.age" />
+                 <t t-foreach="doc.employment_history_ids" t-as="eh">
+                    <t t-esc="eh.organization_name">
+                </t> 
+            </t> -->
+
+        </t>
+    </template>
+</odoo>
