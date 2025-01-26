@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_reveal_lead_opportunity_form_new" model="ir.ui.view">
+	        <field name="name">crm.lead.opportunity.inherited.crm,new</field>
+	        <field name="model">crm.lead</field>
+	        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//div[@name='button_box']" position="inside">
+	               <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                       <field string="Documents" name="doc_count" widget="statinfo"/>
+                   </button>
+	            </xpath>
+
+				<xpath expr="//group[@name='lead_partner']" position="replace">
+					<group name="lead_partner" attrs="{'invisible': [('type', '=', 'opportunity')]}">
+						<field name="is_partner_visible" invisible='1'/>
+						<field name="partner_id" widget="res_partner_many2one"
+							context="{
+								'default_name': contact_name,
+								'default_title': title,
+								'default_street': street,
+								'default_street2': street2,
+								'default_city': city,
+								'default_state_id': state_id,
+								'default_zip': zip,
+								'default_country_id': country_id,
+								'default_function': function,
+								'default_phone': phone,
+								'default_mobile': mobile,
+								'default_email': email_from,
+								'default_user_id': user_id,
+								'default_team_id': team_id,
+								'default_website': website,
+								'default_lang': lang_code,
+								'show_vat': True
+							}" attrs="{'invisible': [('is_partner_visible', '=', False)]}"/>
+						<field name="partner_name"/>
+						<label for="street" string="Cus Address"/>
+						<div class="o_address_format">
+							<field name="street" placeholder="Street..." class="o_address_street"/>
+							<field name="street2" placeholder="Street 2..." invisible="1" class="o_address_street"/>
+							<field name="sub_city_id" placeholder="Sub-City" class="o_address_street"/>
+							<field name="city_id" placeholder="City" class="o_address_city"/>
+							<field name="city" placeholder="City" class="o_address_city" invisible="1"/>
+							<field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+							<field name="zip" placeholder="ZIP" class="o_address_zip"/>
+							<field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+						</div>
+						<field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+						<field name="lang_active_count" invisible="1"/>
+						<field name="lang_code" invisible="1"/>
+						<field name="lang_id" attrs="{'invisible': [('lang_active_count', '&lt;=', 1)]}"
+							options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='lead']/group/group[1]" position="replace">
+					<group string="Contact Information">
+						<field name="partner_name"/>
+						<label for="street_page_lead" string="Address"/>
+						<div class="o_address_format">
+							<field name="street" id="street_page_lead" placeholder="Street..." class="o_address_street"/>
+							<field name="street2" placeholder="Street 2..." invisible="1" class="o_address_street"/>
+							<field name="sub_city_id" placeholder="Sub-City" class="o_address_street"/>
+							<field name="city_id" placeholder="City" class="o_address_city"/>
+							<field name="city" placeholder="City" class="o_address_city" invisible="1"/>
+							<field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+							<field name="zip" placeholder="ZIP" class="o_address_zip"/>
+							<field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+						</div>
+						<field name="website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+						<field name="lang_active_count" invisible="1"/>
+						<field name="lang_id" attrs="{'invisible': [('lang_active_count', '&lt;=', 1)]}"
+							options="{'no_quick_create': True, 'no_create_edit': True, 'no_open': True}"/>
+					</group>
+				</xpath>
+	        </field>
+	    </record>
+    </data>
+</odoo>

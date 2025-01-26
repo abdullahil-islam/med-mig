@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sub_city_tree_view" model="ir.ui.view">
+            <field name="name">sub_city.tree</field>
+            <field name="model">res.sub.city</field>
+            <field name="arch" type="xml">
+                <tree string="Sub City" editable="bottom">
+                    <field name="name"/>
+                    <field name="city_id"/>
+                    <field name="state_id" attrs="{'readonly': [('state_id', '!=', False)]}"/>
+                    <field name="country_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sub_city_act_window" model="ir.actions.act_window">
+            <field name="name">Sub Cities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.sub.city</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no sub-cities. Click here to add new.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="sub_city_menu" parent="contacts.menu_localisation" action="sub_city_act_window" sequence="5"/>
+    </data>
+</odoo>

@@ -21,6 +21,7 @@ class ResPartner(models.Model):
         
     eq_ids = fields.One2many('maintenance.equipment','partner_id')
     eq_count = fields.Integer(compute='_compute_eq_count', string="Machine", store=True)
+    # my_cus_field = fields.Char()
 
     @api.depends('eq_ids')
     def _compute_eq_count(self):
