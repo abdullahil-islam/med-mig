@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_department_form_inherit" model="ir.ui.view">
+            <field name="name">hr.department.inherit</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="hod_ids" widget="many2many_tags" options="{'no_create_edit': True}" string="Managing director/Director"/>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Leave Approvel Hirarchy">
+                            <field name="leave_hir_ids" editable="bottom">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <!-- <field name="group_id" options="{'no_open': True, 'no_create_edit': True}"/> -->
+                                    <field name="user_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="sequence"/>
+                                                <!-- <field name="group_id"/> -->
+                                            </group>
+                                            <group>
+                                                <field name="user_ids"/>
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_holidays_hr_leave_view_form_manager_final" model="ir.ui.view">
+            <field name="name">hr.leave.inherit</field>
+            <field name="model">hr.leave</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+            <field name="arch" type="xml">
+              <xpath expr="//button[@name='action_refuse']" position="replace">
+                    <button string="Refuse" name="action_refuse" type="object"
+                        attrs="{'invisible': [('display_approve_button', '!=', True)]}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_approve']" position="replace">
+                     <button string="Approve" name="action_approve" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('display_approve_button', '!=', True)]}"/>
+                     <button string="Send to Managing director/Director" name="action_send_to_hod" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('display_hod_approve_button', '!=', True)]}"/>
+                    <p style="color:green;"><field name="leave_last_approver"/></p>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="leave_last_approver" invisible="0" style="color:green;"/>
+                    <field name="display_approve_button" invisible="1"/>
+                    <field name="display_hod_approve_button" invisible="1"/>
+                    <field name="approval_ids" readonly="1" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

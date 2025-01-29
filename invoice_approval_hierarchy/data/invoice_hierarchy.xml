@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+
+		<record id="invoice_approval_record" model="invoice.hierarchy">
+			<field name="name">Sale Invoice Approval</field>
+		</record>
+
+		
+	</data>
+</odoo>

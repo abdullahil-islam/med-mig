@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <record id="view_employee_form_document" model="ir.ui.view">
+            <field name="name">hr.employee.new</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                   <button  class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o" groups="hr.group_hr_manager">
+                       <field string="Documents" name="doc_count" widget="statinfo"/>
+                   </button>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="Documents" string="Documents">
+                        <field name="att_ids" context="{'default_res_model': 'hr.employee'}">
+                            <tree string="Documents" create="0">
+                                <field name="name"/>
+                                <field name="type"/>
+                                <field name="datas"/>
+                                <field name="create_uid"/>
+                                <field name="description"/>
+                            </tree>
+                            <form string="Documents">
+                                <group>
+                                    <field name="name"/>
+                                    <field name="type"/>
+                                    <field name="datas"/>
+                                    <field name="mimetype"/>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="description"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

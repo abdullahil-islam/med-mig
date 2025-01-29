@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_hierarchy,access_invoice_hierarchy,model_invoice_hierarchy,base.group_user,1,1,1,1
+access_hierarchy_line,access_hierarchy_line,model_hierarchy_line,base.group_user,1,1,1,1
