@@ -98,6 +98,7 @@
 						<field name="name" class="o_project_name oe_inline" string="Project Name"
 							placeholder="e.g. Office Party" style="width: 100% !important;" />
 						<field name="user_id" invisible="1" />
+						<field name="company_id" invisible="1" />
 						<field name="partner_id" widget="res_partner_many2one" />
 						<label for="street" string="Address"/>
 							<div class="o_address_format" readonly="1">

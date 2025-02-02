@@ -264,10 +264,11 @@ class MaintenanceRequest(models.Model):
                 end_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             else:
                 end_date = rec.x_maintenance_end_date
+
+            diff_str = ''
             if rec.x_maintenance_start_date and end_date:
                 from_date = datetime.strptime(str(rec.x_maintenance_start_date), '%Y-%m-%d %H:%M:%S')
                 to_date = datetime.strptime(str(end_date), '%Y-%m-%d %H:%M:%S')
-                diff_str = ''
                 diff_dates = relativedelta(to_date, from_date)
                 if diff_dates.years:
                     diff_str += str(diff_dates.years) + ' Years '
@@ -281,7 +282,7 @@ class MaintenanceRequest(models.Model):
                     diff_str += str(diff_dates.minutes) + ' Minutes '
                 if diff_dates.seconds:
                     diff_str += str(diff_dates.seconds) + ' Seconds '
-                rec.duration_of_task = diff_str
+            rec.duration_of_task = diff_str
 
     x_maintenance_start_date = fields.Datetime(string="Start Date")
     x_maintenance_end_date = fields.Datetime(string="End Date")

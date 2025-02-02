@@ -26,6 +26,7 @@
         'views/maintenance_report.xml',
         'views/report.xml',
         'views/maintenance_view.xml',
+        'views/partner_views.xml',
         # 'views/ir_attachment_view.xml',
 
         'views/report_invoice.xml',

@@ -14,24 +14,6 @@
             </field>
         </record>
 
-        <!-- Inherit User-group Form View -->
-        <!-- <record id="user_groups_view_inherit_maintenance" model="ir.ui.view">
-            <field name="name">res.users.groups.inherit.maintenance</field>
-            <field name="model">res.users</field>
-            <field name="inherit_id" ref="base.user_groups_view"/>
-            <field name="arch" type="xml">
-                <field name="sel_groups_20_21_22" position="attributes">
-                    <attribute name="attrs">{'invisible':[('is_admin_user_temp', '=', False)]}</attribute>
-                </field>
-                <field name="sel_groups_33_37" position="attributes">
-                    <attribute name="attrs">{'invisible':[('is_admin_user_temp', '=', False)]}</attribute>
-                </field>
-                <field name="sel_groups_2_3" position="attributes">
-                    <attribute name="attrs">{'invisible':[('is_admin_user_temp', '=', False)]}</attribute>
-                </field>
-            </field>
-        </record> -->
-        
         <!-- Display new menu User for Ex. of Eng. Head -->
         <record id="action_res_users_maintenance" model="ir.actions.act_window">
             <field name="name">Users</field>
@@ -62,21 +44,5 @@
         <menuitem action="action_res_users_maintenance" id="menu_res_users_child"
             groups="repair_maintenance.group_maintenance_users" sequence="1"
             parent="repair_maintenance.menu_res_users_maintenance"/>
-        
-        <!-- User Change password -->
-<!--        <act_window id="base.change_password_wizard_action"-->
-<!--            name="Change Password"-->
-<!--            src_model="res.users"-->
-<!--            res_model="change.password.wizard"-->
-<!--            view_mode="form"-->
-<!--            key2="client_action_multi" target="new"-->
-<!--            groups="base.group_erp_manager,repair_maintenance.group_maintenance_users"/>-->
-
-        <record id="base.change_password_wizard_action" model="ir.actions.act_window">
-            <field name="name">Change Password</field>
-            <field name="res_model">change.password.wizard</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
     </data>
 </odoo>

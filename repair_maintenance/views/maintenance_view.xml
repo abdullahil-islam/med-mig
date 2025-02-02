@@ -19,36 +19,6 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="view_partner_tree_inherit1">
-            <field name="name">res.partner.tree.form.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_tree"/>
-            <field name="arch" type="xml">
-                <field name="function" position="before">
-                    <field string="Machine" name="eq_count"/>
-                </field>
-            </field>
-        </record>
-
-        <record id="res_partner_inherit_form_health_center_view" model="ir.ui.view">
-            <field name="name">res.partner.inherit.form.health.center.view</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//button[@class='oe_stat_button']" position="before">
-                    <button name="%(repair_maintenance.hr_equipment_action_new)d"
-                            type="action"
-                            class="oe_stat_button"
-                            context="{'default_partner_id': active_id}"
-                            domain="{'partner_id': active_id}"
-                            icon="fa-ticket">
-                        <field string="Machine" name="eq_count" widget="statinfo"/>
-                    </button>
-                    <field name="eq_ids" invisible="1"/>
-                </xpath>
-            </field>
-        </record>
-
         <record id="maintenance.hr_equipment_request_action" model="ir.actions.act_window">
             <field name="name">Maintenance Requests</field>
             <field name="res_model">maintenance.request</field>
@@ -162,7 +132,7 @@
                     <attribute name="invisible">1</attribute>
                 </field>
                 <field name="partner_id" position="replace"/>
-                <field name="company_id" position="after">
+                <field name="employee_id" position="after">
                     <field name="partner_id" context="{'default_supplier': False, 'default_customer': True}"/>
                     <label for="street" string="Address"/>
                     <div class="o_address_format">

@@ -117,7 +117,7 @@ class Repair(models.Model):
 
         return True
 
-    
+    @api.model
     def calculate_duration_of_repair(self):
         for rec in self:
             end_date = False
@@ -125,10 +125,11 @@ class Repair(models.Model):
                 end_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             else:
                 end_date = rec.end_repair_date
+
+            diff_str = ''
             if rec.start_repair_date and end_date:
                 from_date = datetime.strptime(str(rec.start_repair_date), '%Y-%m-%d %H:%M:%S')
                 to_date = datetime.strptime(str(end_date), '%Y-%m-%d %H:%M:%S')
-                diff_str = ''
                 diff_dates = relativedelta(to_date, from_date)
                 if diff_dates.years:
                     diff_str += str(diff_dates.years) + ' Years '
@@ -142,7 +143,7 @@ class Repair(models.Model):
                     diff_str += str(diff_dates.minutes) + ' Minutes '
                 if diff_dates.seconds:
                     diff_str += str(diff_dates.seconds) + ' Seconds '
-                rec.duration_of_repair = diff_str
+            rec.duration_of_repair = diff_str
 
     number = fields.Integer("Number for sequence")
     type = fields.Selection([('cmc', 'CMC'),
