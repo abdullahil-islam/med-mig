@@ -288,9 +288,9 @@
                             <field name="description" placeholder="Internal Note ......."/>
                         </page>
 
-<!--                        <page string="Description of Work Done">-->
-<!--                            <field name="x_description_work_done" placeholder="Add Description of Work Done..."/>-->
-<!--                        </page>-->
+                        <page string="Description of Work Done">
+                            <field name="description_work_done" placeholder="Add Description of Work Done..."/>
+                        </page>
 
                     </notebook>
                 </xpath>

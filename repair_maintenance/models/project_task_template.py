@@ -87,6 +87,7 @@ class ProjectProject(models.Model):
             fields_data = template.fields_get()
             skip_fields = (
                 'project_id',
+                'message_partner_ids',
                 'message_follower_ids',
                 'id',
                 'write_date',
@@ -95,7 +96,8 @@ class ProjectProject(models.Model):
                 'message_ids',
                 'default_stage_id',
                 'child_ids',
-		'timesheet_ids',
+		        'timesheet_ids',
+                'name_of_equipment',
             )
             for field_data in fields_data:
                 if field_data not in skip_fields:
@@ -111,7 +113,6 @@ class ProjectProject(models.Model):
             vals.update({
                 'stage_id': template.default_stage_id.id,
                 'project_id': res.id,
-                'user_id': self.env.user.id
             })
             _logger.warning("-create_vals-- : %s", vals)
             ProjectTask.create(vals)

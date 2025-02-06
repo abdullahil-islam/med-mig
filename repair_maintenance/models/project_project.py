@@ -112,7 +112,20 @@ class ProjectProject(models.Model):
             self.country_id = self.partner_id.country_id and self.partner_id.country_id.id or ''
          
     
-            
+    def attachment_tree_view(self):
+        attachment_action = self.env.ref('base.action_attachment')
+        action = attachment_action.read()[0]
+        action['domain'] = str([
+            '|',
+            '&',
+            ('res_model', '=', 'project.project'),
+            ('res_id', 'in', self.ids),
+            '&',
+            ('res_model', '=', 'project.task'),
+            ('res_id', 'in', self.task_ids.ids)
+        ])
+        action['context'] = "{'default_res_model': '%s','default_res_id': %d}" % (self._name, self.id)
+        return action
             
     @api.model
     def create(self, vals):
@@ -196,10 +209,10 @@ class ProjectTask(models.Model):
                 end_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             else:
                 end_date = rec.x_project_task_end_date
+            diff_str = ''
             if rec.x_project_task_start_date and end_date:
                 from_date = datetime.strptime(str(rec.x_project_task_start_date), '%Y-%m-%d %H:%M:%S')
                 to_date = datetime.strptime(str(end_date), '%Y-%m-%d %H:%M:%S')
-                diff_str = ''
                 diff_dates = relativedelta(to_date, from_date)
                 if diff_dates.years:
                     diff_str += str(diff_dates.years) + ' Years '
@@ -213,7 +226,7 @@ class ProjectTask(models.Model):
                     diff_str += str(diff_dates.minutes) + ' Minutes '
                 if diff_dates.seconds:
                     diff_str += str(diff_dates.seconds) + ' Seconds '
-                rec.duration_of_task = diff_str
+            rec.duration_of_task = diff_str
 
     x_project_task_start_date = fields.Datetime(string="Start Date")
     x_project_task_end_date = fields.Datetime(string="End Date")

@@ -219,6 +219,7 @@ class MaintenanceRequest(models.Model):
 
     user_ids = fields.Many2many('res.users', string="Responsible Engr")
     tag_id = fields.Many2many('res.partner.category',related="partner_id.category_id", string="Tags")
+    description_work_done = fields.Html('Description of Work Done')
     
     
     @api.model

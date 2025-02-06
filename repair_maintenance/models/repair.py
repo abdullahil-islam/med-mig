@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import pytz
 
@@ -171,14 +170,9 @@ class Repair(models.Model):
                                     string='# Documents')
     is_new_request = fields.Boolean('New Request')
     is_engineer = fields.Boolean('Is Engineer', compute='_compute_group')
-    # categ_id = fields.Many2one(
-    #     'product.category', related='product_id.categ_id', string='Category of Product')
     categ_id = fields.Many2one('product.category', string='Category of Product')
 
     # Default field for rename label.
-    product_id = fields.Many2one(
-        'product.product', string='Machine',
-        readonly=True, required=True, states={'draft': [('readonly', False)]})
     equipment_id = fields.Many2one('maintenance.equipment',related="product_id.equipment_id", string='Equipment')
 
     category_id = fields.Many2one('maintenance.equipment.category', string='Category')
@@ -206,12 +200,6 @@ class Repair(models.Model):
     product_id = fields.Many2one(
         'product.product', string='Product to Repair',
         readonly=True, required=True, states={'new_request': [('readonly', False)], 'draft': [('readonly', False)]})
-    operations = fields.One2many(
-        'repair.line', 'repair_id', 'Parts',
-        copy=True, readonly=True, states={'new_request': [('readonly', False)], 'draft': [('readonly', False)]})
-    fees_lines = fields.One2many(
-        'repair.fee', 'repair_id', 'Operations',
-        copy=True, readonly=True, states={'new_request': [('readonly', False)], 'draft': [('readonly', False)]})
     invoice_method = fields.Selection([
         ("none", "No Invoice"),
         ("b4repair", "Before Repair")], string="Invoice Method",
@@ -230,6 +218,7 @@ class Repair(models.Model):
     start_repair_date = fields.Datetime(string='Start Repair', readonly=True)
     end_repair_date = fields.Datetime(string='End Repair', readonly=True)
     duration_of_repair = fields.Char(string="Duration of Task", compute=calculate_duration_of_repair)
+    description_work_done = fields.Html('Description of Work Done')
 
 
     @api.onchange('type')

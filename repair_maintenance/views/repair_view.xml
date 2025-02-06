@@ -184,6 +184,16 @@
                 <field name="partner_id" position="after">
                     <field name="tag_id" readonly="1" widget="many2many_tags"/>
                 </field>
+
+                <xpath expr="//field[@name='internal_notes']/.." position="attributes">
+                    <attribute name="string">Problem Symptom Notes</attribute>
+                </xpath>
+
+                <xpath expr="//page[last()]" position="before">
+                    <page string="Description Of Work Done" name="description_work_done">
+                        <field name="description_work_done" placeholder="Add Description Of Work Done."/>
+                    </page>
+                </xpath>
             </field>
         </record>
 

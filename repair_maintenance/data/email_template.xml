@@ -266,7 +266,7 @@
                 <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
                 <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
                 <b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
-	<b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+	<b>17. Description of Work Done:</b> ${object.description_work_done or ''}<br/>
                 Thanks.
                 ]]>
             </field>
@@ -301,7 +301,7 @@
                 <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
                 <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
                <b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
-	<b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+	<b>17. Description of Work Done:</b> ${object.description_work_done or ''}<br/>
                 Thanks.
                 ]]>
             </field>
@@ -358,7 +358,7 @@
                 <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
                 <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
 	<b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
-               <b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+               <b>17. Description of Work Done:</b> ${object.description_work_done or ''}<br/>
                 Thanks.
                 ]]>
             </field>
@@ -390,7 +390,7 @@
                 <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
                 <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
 	<b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
-                 <b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+                 <b>17. Description of Work Done:</b> ${object.description_work_done or ''}<br/>
                 Thanks.
                 ]]>
             </field>
