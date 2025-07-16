@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Added template for document expire notification -->
+    <template id="assets_backend" name="document_notification assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <!-- systray -->
+            <script type="text/javascript" src="/transport_document_notification/static/src/js/systray_document_notification_menu.js"></script>
+        </xpath>
+    </template>
+</odoo>

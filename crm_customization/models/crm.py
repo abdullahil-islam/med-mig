@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, SUPERUSER_ID, _
 
+
 class CRM(models.Model):
     _inherit = 'crm.lead'
 
@@ -57,3 +58,35 @@ class CRM(models.Model):
         })
         return res
 
+    @api.onchange('country_id', 'state_id', 'city_id')
+    def _onchange_sub_city_domain(self):
+        """
+        Set domain for sub_city_id dynamically based on country, state and city.
+        """
+        for record in self:
+            domain = []
+            if record.country_id:
+                domain.append(('country_id', '=', record.country_id.id))
+            if record.state_id:
+                domain.append(('state_id', '=', record.state_id.id))
+            if record.city_id:
+                domain.append(('city_id', '=', record.city_id.id))
+            return {'domain': {'sub_city_id': domain}}
+
+    @api.onchange('country_id', 'state_id')
+    def _onchange_city_domain(self):
+        for record in self:
+            domain = []
+            if record.country_id:
+                domain.append(('country_id', '=', record.country_id.id))
+            if record.state_id:
+                domain.append(('state_id', '=', record.state_id.id))
+            return {'domain': {'city_id': domain}}
+
+    @api.onchange('country_id')
+    def _onchange_state_domain(self):
+        for record in self:
+            domain = []
+            if record.country_id:
+                domain.append(('country_id', '=', record.country_id.id))
+            return {'domain': {'state_id': domain}}

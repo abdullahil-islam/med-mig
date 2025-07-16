@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    While merging the delivery slip for customer and store report from "custom_sale_order" module,-->
+<!--    This below portion is being kept disable to avoid conflicts-->
+
+<!--    Inherit Delivery slip report template and modify accordingly-->
+<!--    <template id="inherited_report_delivery_document" inherit_id="stock.report_delivery_document">-->
+<!--        Disable the 'phone' field in the address sections in the report as now it's coming from the _name_get()-->
+<!--        <xpath expr="//div[@name='outgoing_delivery_address']/div" position="replace">-->
+<!--            <div t-field="o.move_ids[0].partner_id"-->
+<!--                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//div[@name='outgoing_warehouse_address']/div" position="replace">-->
+<!--            <div t-field="o.picking_type_id.warehouse_id.partner_id"-->
+<!--                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//div[@name='partner_header']/div" position="replace">-->
+<!--            <div t-field="partner.commercial_partner_id"-->
+<!--                                     t-options='{"widget": "contact", "fields": ["address", "name", "vat"], "no_marker": True}'/>-->
+<!--        </xpath>-->
+
+<!--        Add Note field before the signature in the delivery slip report-->
+<!--        <xpath expr="//div[@name='signature']" position="before">-->
+<!--            <h6 class="fw-bold" t-if="o.note">Note :</h6>-->
+<!--            <p t-if="o.note" t-field="o.note"/>-->
+<!--        </xpath>-->
+
+<!--        <xpath expr="//div[@name='div_origin']" position="after">-->
+<!--            <div t-if="o.add_contact_person" class="col-auto col-3 mw-100 mb-2" name="div_origin">-->
+<!--                <strong>T.Contact Person:</strong>-->
+<!--                <p t-field="o.add_contact_person" class="m-0"/>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+
+<!--    Inherit Picking Operation report template and modify accordingly-->
+    <template id="inherited_report_picking" inherit_id="stock.report_picking">
+<!--        Disable the 'phone' field in the address sections in the report as now it's coming from the _name_get()-->
+        <xpath expr="//div[@name='div_outgoing_address']" position="replace">
+            <div class="col-6" name="div_outgoing_address">
+                <div t-if="o.should_print_delivery_address()">
+                    <span><strong>Delivery Address:</strong></span>
+                    <div t-field="o.move_ids[0].partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                </div>
+                <div t-elif="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
+                    <span><strong>Warehouse Address:</strong></span>
+                    <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@name='partner_header']/div" position="replace">
+            <div t-field="o.partner_id.commercial_partner_id"
+                t-options='{"widget": "contact", "fields": ["address", "name", "vat"], "no_marker": True}'/>
+        </xpath>
+    </template>
+
+</odoo>

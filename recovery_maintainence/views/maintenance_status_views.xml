@@ -1,0 +1,166 @@
+<odoo>
+    <record id="view_maintenance_status_tree" model="ir.ui.view">
+        <field name="name">maintenance.status.tree</field>
+        <field name="model">maintenance.status</field>
+        <field name="arch" type="xml">
+            <tree string="Maintenance Status">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="equipment_ids" widget="many2many_tags"/>
+                <field name="billing_period"/>
+                <field name="status_date"/>
+                <field name="total_amount"/>
+                <field name="total_receive_amount"/>
+                <field name="balance_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_maintenance_status_form" model="ir.ui.view">
+        <field name="name">maintenance.status.form</field>
+        <field name="model">maintenance.status</field>
+        <field name="arch" type="xml">
+            <form string="Maintenance Status">
+                <group name="basic_info">
+                    <field name="name" invisible="1"/>
+                    <field name="partner_id" string="Customer"/>
+                    <field name="partner_full_address" string="Customer Address"/>
+                    <field name="contact_address" string="Contact Person &amp; Contact No"/>
+                    <field name="partner_email" string="Email"/>
+                </group>
+                <group name="balances" string="Maintenance Status">
+                    <field name="equipment_ids" options="{'no_create': True}" widget="many2many_tags"/>
+                    <field name="equipment_model_ids" string="Model" widget="many2many_tags"/>
+                    <field name="remarks"/>
+                </group>
+                <notebook>
+                    <page name="maintenance_entries" string="Maintenance Entries">
+                        <field name="maintenance_line_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="maintenance_status_id" invisible="1"/>
+                                <!--                            <field name="allow_generate_invoice" invisible="1"/>-->
+                                <field name="invoice_state" invisible="1"/>
+                                <field name="equipment_ids_dom" invisible="1"/>
+                                <field name="sb_type" string="SB Type"
+                                       attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="name" string="ID" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="billing_period" style="width: 100px"
+                                       attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="start_date" widget="date"
+                                       attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="end_date" widget="date" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="line_equipment_ids" string="Machine" widget="many2many_tags"/>
+                                <field name="invoice_id" string="Billing Number" readonly="1"/>
+                                <!--                            <field name="invoice_number" string="Billing Number"/>-->
+                                <field name="billing_date" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="billing_amount" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="paid_date" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="paid_amount"/>
+                                <field name="vat_ait" string="VAT/AIT"
+                                       attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="mrn_no" attrs="{'readonly': [('is_locked', '=', True)]}" invisible="1"/>
+                                <button name="open_related_payments" type="object" string="MRN No"/>
+                                <field name="balance_due"/>
+                                <!--                            <field name="invoiced_amount" invisible="1"/>-->
+                                <field name="remarks" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="attachment" style="width: 200px;"
+                                       attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="is_locked" widget="toggle_button" invisible="1"/>
+                                <button name="action_lock_line" type="object" icon="fa-lock" class="btn btn-link text-info"
+                                        attrs="{'invisible': [('is_locked', '=', False)]}"/>
+                                <button name="action_lock_line" type="object" icon="fa-unlock"
+                                        groups="recovery_maintainence.group_maintenance_entry_user"
+                                        attrs="{'invisible': [('is_locked', '=', True)]}"/>
+                                <button string="Generate Invoice" type="object"
+                                        name="action_generate_invoice"
+                                        attrs="{'invisible': ['|', ('invoice_id', '!=', False), ('is_locked', '=', False)]}"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+
+                <group class="oe_subtotal_footer oe_right">
+                    <field name="total_amount"/>
+                    <field name="total_receive_amount"/>
+                    <field name="balance_amount" class="oe_subtotal_footer_separator"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Maintenance Status -->
+    <record id="action_maintenance_status" model="ir.actions.act_window">
+        <field name="name">Maintenance Status</field>
+        <field name="res_model">maintenance.status</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Maintenance Status Menu inside Recovery -->
+    <menuitem id="menu_recovery_maintenance_status" name="Maintenance Entry" parent="menu_recovery_root"
+              action="recovery_maintainence.action_maintenance_status"/>
+
+    <record id="maintenance_status_line_view_tree_list" model="ir.ui.view">
+        <field name="name">maintenance_status_line_view_tree_list</field>
+        <field name="model">maintenance.status.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="maintenance_status_id" invisible="1"/>
+                <!--                <field name="invoice_state" invisible="1"/>-->
+                <field name="partner_id"/>
+                <field name="equipment_ids_dom" invisible="1"/>
+                <field name="sb_type" string="SB Type"/>
+                <field name="name" string="ID"/>
+                <field name="billing_period"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="line_equipment_ids" string="Machine" widget="many2many_tags"/>
+                <field name="invoice_id" string="Billing Number"/>
+                <!--                <field name="invoice_number" string="Billing Number"/>-->
+                <field name="billing_date"/>
+                <field name="billing_amount"/>
+                <field name="paid_date"/>
+                <field name="paid_amount"/>
+                <field name="vat_ait" string="VAT/AIT"/>
+                <field name="mrn_no"/>
+                <field name="balance_due"/>
+                <field name="remarks"/>
+                <field name="attachment" widget="attach"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="maintenance_status_line_view_pivot" model="ir.ui.view">
+        <field name="name">maintenance_status_line_view_pivot</field>
+        <field name="model">maintenance.status.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Maintenance Entries">
+                <field name="line_equipment_ids" type="row"/>
+                <field name="billing_amount" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="maintenance_status_line_view_graph" model="ir.ui.view">
+        <field name="name">maintenance_status_line_view_graph</field>
+        <field name="model">maintenance.status.line</field>
+        <field name="arch" type="xml">
+            <graph string="Maintenance Entries">
+                <field name="line_equipment_ids" type="row"/>
+                <field name="billing_amount" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+
+    <record id="action_maintenance_status_line" model="ir.actions.act_window">
+        <field name="name">Maintenance Entries</field>
+        <field name="res_model">maintenance.status.line</field>
+        <field name="view_mode">tree,pivot,graph,form</field>
+    </record>
+
+    <!--    Reporting Main menu-->
+    <menuitem id="menu_recovery_reporting" name="Reports" parent="menu_recovery_root"/>
+    <menuitem id="menu_maintenance_status_line" parent="menu_recovery_reporting"
+              action="recovery_maintainence.action_maintenance_status_line"/>
+
+</odoo>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="report_medionnics_service_bill_document">
+            <t t-call="recovery_maintainence.service_bill_external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <t t-set="address">
+                    <address t-field="o.partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                    <div t-if="o.partner_id.vat" class="mt16">
+                        <t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>
+                        :
+                        <span t-field="o.partner_id.vat"/>
+                    </div>
+                </t>
+                <div class="page">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6>TO</h6>
+                            <h6>The Managing Director</h6>
+                            <h6 t-esc="o.partner_id.name">AB Hospital</h6>
+                            <h6 t-esc="o.partner_id.street">22 K D A, Outer Bypass Road</h6>
+                            <h6 t-esc="o.partner_id.city + ', ' + o.partner_id.country_id.name">Shonadanga, Khulna.</h6>
+                        </div>
+                        <div class="col-6"/>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12">
+                            <h6>Subject: Repair &amp; Maintenance Charge of <span t-esc="o.maintenance_status_line_id.name"/> Machine.</h6>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <th>S/N</th>
+                                <th colspan="2">Description</th>
+                                <th colspan="2">Duration/Month</th>
+                                <th>Billing Amount</th>
+                                <th>Remarks</th>
+                            </tr>
+                            <tr>
+                                <th/>
+                                <th colspan="2">Bill For Maintenance/Service Charge</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th/>
+                                <th/>
+                            </tr>
+                            <tr>
+                                <th/>
+                                <th>Machine</th>
+                                <th>Model</th>
+                                <th/>
+                                <th/>
+                                <th/>
+                                <th/>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.invoice_line_ids" t-as="line">
+                                <td><t t-esc="line_index + 1"/></td>
+                                <td><t t-esc="', '.join(o.maintenance_status_line_id.line_equipment_ids.mapped('name'))"/></td>
+                                <td><t t-esc="', '.join([equipment.category_id.name for equipment in o.maintenance_status_line_id.line_equipment_ids])"/></td>
+                                <td t-if="o.maintenance_status_line_id.sb_type == 'amc'"><t t-esc="o.maintenance_status_line_id.start_date.strftime('%B %d %Y')"/></td>
+                                <td t-elif="o.maintenance_status_line_id.sb_type == 'call'">On Call</td>
+                                <td t-else="o.maintenance_status_line_id.sb_type == 'repair'">Repair</td>
+                                <td t-if="o.maintenance_status_line_id.sb_type == 'amc'"><t t-esc="o.maintenance_status_line_id.end_date.strftime('%B %d %Y')"/></td>
+                                <td t-else=""/>
+                                <td><t t-esc="line.price_subtotal"/></td>
+                                <td/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row p-3">
+                        <div class="col-2 text-end pt-2" style="border: 1px solid black;">
+                            <h6>In Word:</h6>
+                        </div>
+                        <div class="col-10 pt-2" style="border: 1px solid black;">
+                            <h6 t-esc="o.currency_id.amount_to_text(o.amount_total)">Taka Fifteen Thousand Only.</h6>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-4">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div style="border-top: 1px solid black; width: 170px;">
+                                <p class="p-0 m-0">Prepared By</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_1">Shibli Bugdad Bhuyan</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_1_post">Executive "Recovery"</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_1_mobile">Cell: 01700707266</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div style="border-top: 1px solid black; width: 170px;">
+                                <p class="p-0 m-0">Prepared By</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_2">Shibli Bugdad Bhuyan</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_2_post">Executive "Recovery"</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_2_mobile">Cell: 01700707266</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div style="border-top: 1px solid black; width: 170px;">
+                                <p class="p-0 m-0">Prepared By</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_3">Shibli Bugdad Bhuyan</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_3_post">Executive "Recovery"</p>
+                                <p class="p-0 m-0" t-esc="service_bill_approver_3_mobile">Cell: 01700707266</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_medionics_service_bill">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang"
+                       t-value="o.user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="recovery_maintainence.report_medionnics_service_bill_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+        <record id="medionics_paperformat_service_bill" model="report.paperformat">
+            <field name="name">Medionics Service Bill</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+                id="medionics_service_bill_report"
+                model="account.move"
+                string="Medionics Service Bill"
+                report_type="qweb-pdf"
+                name="recovery_maintainence.report_medionics_service_bill"
+                file="recovery_maintainence.report_medionics_service_bill"
+                attachment="object.state == 'posted' and ('INV'+(object.name or '').replace('/','')+'.pdf')"
+                print_report_name="(object._get_report_base_filename())"
+                groups="account.group_account_invoice"
+                paperformat="medionics_paperformat_service_bill"
+        />
+    </data>
+</odoo>

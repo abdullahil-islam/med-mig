@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="sale_order_template_view_form_inherit" model="ir.ui.view">
+            <field name="name">sale_order_template_view_form_inherit</field>
+            <field name="model">sale.order.template</field>
+            <field name="inherit_id" ref="sale_management.sale_order_template_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="approval_checkpoints" string="Approval CheckPoints">
+                        <div class="row ml-2">
+                            <div class="col-4 border">
+                                <div class="row px-4" style="font-weight: bold; background-color: #7c7bad; color: white;">Installment</div>
+                                <div class="row text-center" style="background-color: #e6e6e6; font-weight: bold; padding: 5px 0px;">
+                                    <div class="col border px-2">Parameter</div>
+                                    <div class="col border px-2">As Per Policy</div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col border">Cash Price</div>-->
+<!--                                    <div class="col border"><field name="cash_price"/></div>-->
+<!--                                </div>-->
+                                <div class="row">
+                                    <div class="col border">Installment Price</div>
+                                    <div class="col border"><field name="policy_price"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">Down Payment</div>
+                                    <div class="col border"><field name="down_payment"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">No. Of Installment</div>
+                                    <div class="col border"><field name="no_of_installment"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">Warranty</div>
+                                    <div class="col border"><field name="warranty"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">UPS</div>
+                                    <div class="col border"><field name="ups"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">Transportation</div>
+                                    <div class="col border"><field name="transportation"/></div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col border">Any Other</div>-->
+<!--                                    <div class="col border"><field name="any_other"/></div>-->
+<!--                                </div>-->
+                            </div>
+
+                            <div class="col-1"/>
+
+                            <div class="col-4 border">
+                                <div class="row px-4" style="font-weight: bold; background-color: #7c7bad; color: white;">Cash With Credit</div>
+                                <div class="row text-center" style="background-color: #e6e6e6; font-weight: bold; padding: 5px 0px;">
+                                    <div class="col border px-2">Parameter</div>
+                                    <div class="col border px-2">As Per Policy</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">Cash Price</div>
+                                    <div class="col border"><field name="credit_cash_price"/></div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col border">Installment Price</div>-->
+<!--                                    <div class="col border"><field name="credit_policy_price"/></div>-->
+<!--                                </div>-->
+                                <div class="row">
+                                    <div class="col border">Down Payment</div>
+                                    <div class="col border"><field name="credit_down_payment"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">No. Of Installment</div>
+                                    <div class="col border"><field name="credit_no_of_installment"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">Warranty</div>
+                                    <div class="col border"><field name="credit_warranty"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">UPS</div>
+                                    <div class="col border"><field name="credit_ups"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col border">Transportation</div>
+                                    <div class="col border"><field name="credit_transportation"/></div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col border">Any Other</div>-->
+<!--                                    <div class="col border"><field name="any_other"/></div>-->
+<!--                                </div>-->
+                            </div>
+                            <div class="col-3"/>
+                        </div>
+                    </page>
+
+                    <page name="warranty_condition" string="Warranty Condition">
+                        <label for="warranty_condition" string="Warranty Condition"/>
+                        <field name="warranty_condition"/>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='note']" position="replace">
+                </xpath>
+
+                <xpath expr="//field[@name='sale_order_template_line_ids']" position="after">
+                    <lebel for="note" string="Default Terms &amp; Condition"/>
+                    <field name="note" placeholder="The Administrator can set default Terms &amp; Conditions in Sales Settings. Terms set here will show up instead if you select this quotation template."/>
+                </xpath>
+
+                <xpath expr="//field[@name='sale_order_template_line_ids']/tree/field[last()]" position="after">
+                    <field name="is_master_product" style="width: 150px;"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

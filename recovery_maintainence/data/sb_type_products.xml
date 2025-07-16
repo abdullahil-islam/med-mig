@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_category_maintenance_service" model="product.category">
+            <field name="name">Maintenance Services</field>
+        </record>
+        <record id="product_template_sb_type_amc" model="product.template">
+            <field name="name">SB Type AMC</field>
+            <field name="categ_id" ref="recovery_maintainence.product_category_maintenance_service"/>
+            <field name="standard_price">1.0</field>
+            <field name="list_price">1.0</field>
+            <field name="type">service</field>
+            <field name="sb_type">amc</field>
+            <field name="uom_id" ref="uom.product_uom_hour"/>
+            <field name="uom_po_id" ref="uom.product_uom_hour"/>
+        </record>
+        <record id="product_template_sb_type_call" model="product.template">
+            <field name="name">SB Type On Call</field>
+            <field name="categ_id" ref="recovery_maintainence.product_category_maintenance_service"/>
+            <field name="standard_price">1.0</field>
+            <field name="list_price">1.0</field>
+            <field name="type">service</field>
+            <field name="sb_type">call</field>
+            <field name="uom_id" ref="uom.product_uom_hour"/>
+            <field name="uom_po_id" ref="uom.product_uom_hour"/>
+        </record>
+        <record id="product_template_sb_type_repair" model="product.template">
+            <field name="name">SB Type Repair</field>
+            <field name="categ_id" ref="recovery_maintainence.product_category_maintenance_service"/>
+            <field name="standard_price">1.0</field>
+            <field name="list_price">1.0</field>
+            <field name="type">service</field>
+            <field name="sb_type">repair</field>
+            <field name="uom_id" ref="uom.product_uom_hour"/>
+            <field name="uom_po_id" ref="uom.product_uom_hour"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cheque_detail,access_cheque_detail,model_cheque_detail,base.group_user,1,1,1,1
+access_bank_detail,access_bank_detail,model_bank_detail,base.group_user,1,1,1,1
+access_cheque_pending,access_cheque_pending,model_cheque_pending,base.group_user,1,1,1,1

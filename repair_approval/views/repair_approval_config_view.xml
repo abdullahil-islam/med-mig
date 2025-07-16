@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="repair_order_inherit_form" model="ir.ui.view">
+		<field name="name">repair.order.inherit.form</field>
+		<field name="model">repair.order</field>
+		<field name="inherit_id" ref="repair.view_repair_order_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//form/header/field[@name='state']" position="before">
+				<button name="repair_approval"
+					attrs="{'invisible':[('approval_pending','!=',True)]}" type="object"
+					string="Approve" class="btn-primary" />
+			</xpath>
+			<xpath expr="//form/header/button[@name='action_repair_start']" position="attributes">
+				<attribute name="attrs">{'invisible': ['|', ('display_validate_button','=', False), '&amp;', ('state','!=','confirmed'), '!', '&amp;', ('state','=','ready'), ('invoice_method','=','b4repair')]}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='partner_id']" position="after">
+			     <field name="approval_pending" invisible="1" force_save="1"/>
+			     <field name="repair_last_approver" invisible="0" style="color:green;" attrs="{'invisible':[('type', '!=', 'on_call')]}"/>
+                 <field name="approval_ids" readonly="1" widget="many2many_tags" force_save="1" attrs="{'invisible':[('type', '!=', 'on_call')]}" invisible="1"/>
+			     <field name="repair_last_approver_id" readonly="1" force_save="1" attrs="{'invisible':[('type', '!=', 'on_call')]}"/>
+                 <field name="display_validate_button" invisible="1"/>
+				<field name="type_readonly" invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="inherit_repair_order_type" model="ir.ui.view">
+		<field name="name">repair.order.inherit.form.type</field>
+		<field name="model">repair.order</field>
+		<field name="inherit_id" ref="repair_maintenance.view_repair_order_form_inherit_maintenance_repair"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='type']" position="attributes">
+				<attribute name="readonly">1</attribute>
+			</xpath>
+<!--			<xpath expr="//field[@name='product_id']" position="attributes">-->
+<!--				<attribute name="context">{'search_equipment': True, 'based_on_partner': partner_id}</attribute>-->
+<!--			</xpath>-->
+		</field>
+	</record>
+
+
+	<record id="repair_approval_form" model="ir.ui.view">
+		<field name="model">repair.hierarchy</field>
+		<field name="arch" type="xml">
+			<form string="Repair Approval" options="{'no_create' : True}"
+				delete="false" duplicate="false" create="false">
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group>
+						<field name="repair_hir_ids">
+							<form>
+								<sheet>
+									<group>
+										<group>
+											<field name="sequence" widget="handle" />
+											<field name="user_ids" widget="many2many_tags"
+												options="{'no_create_edit': True}" />
+										</group>
+									</group>
+								</sheet>
+							</form>
+							<tree editable="bottom">
+								<field name="sequence" widget="handle" />
+								<field name="user_ids" widget="many2many_tags" options="{'no_create_edit': True}" />
+							</tree>
+						</field>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_repair_approval" model="ir.actions.act_window">
+		<field name="name">Repair Approval</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">repair.hierarchy</field>
+		<field name="view_mode">form</field>
+		<field name="res_id" ref="repair_approval.repair_approval_record" />
+		<field name="context">{}</field>
+		<field name="domain">[]</field>
+	</record>
+	<menuitem id="menu_repair_approval" action="action_repair_approval"
+		parent="repair_maintenance.menu_repair_order_main" sequence="100" />
+
+</odoo>

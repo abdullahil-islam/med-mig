@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="account_payment_register_form_inherit" model="ir.ui.view">
+            <field name="name">recovery.account_payment_register.form</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='communication']" position="after">
+                    <field name="effective_date" string="Cheque Issue Date"/>
+                    <field name="bank_ref" string="MIL/MPL Bank Reference"/>
+                    <field name="chq_deposit_date" string="Cheque Deposit Date"/>
+                    <field name="cheque_ref" string="Cheque Reference"/>
+                    <field name="cus_chq_bank_ref" string="Cus Chq Bank Ref"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_payment_main_form_inherit" model="ir.ui.view">
+            <field name="name">recovery.account_payment.main_form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <group string="Bank &amp; Cheque Information">
+                        <group>
+                            <field name="effective_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="bank_ref" string="MIL/MPL Bank Reference" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="cheque_ref" string="Cheque Reference" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="cus_chq_bank_ref" string="Cus Chq Bank Ref" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,102 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="crm_team_view_form_inherit" model="ir.ui.view">
+            <field name="name">crm_team_view_form_inherit</field>
+            <field name="model">crm.team</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Zone Mapping" name="zone_mapping">
+                        <field name="zone_mapping_ids">
+                            <tree editable="bottom">
+                                <field name="user_id" string="Team Member"/>
+                                <field name="sub_city_ids" string="Zone" widget="many2many_tags"/>
+                                <field name="city_ids" string="Cities" widget="many2many_tags"/>
+                                <field name="state_ids" string="States" widget="many2many_tags"/>
+                                <field name="country_ids" string="Countries" widget="many2many_tags"/>
+                                <button name="show_zone_analysis" icon="fa-list" type="object"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="crm_lead_form_inherit_zone_map" model="ir.ui.view">
+            <field name="name">crm_lead_form_inherit_zone_map</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[last()]" position="before">
+                    <button name="compute_allowed_address_fields" string="Update Zones" type="object"/>
+                </xpath>
+
+                <xpath expr="//page[@name='lead']//field[@name='partner_name']" position="after">
+                    <field name="allowed_sub_city_ids" widget="many2many_tags" invisible="1"/>
+                    <field name="allowed_city_ids" widget="many2many_tags" invisible="1"/>
+                    <field name="allowed_state_ids" widget="many2many_tags" invisible="1"/>
+                    <field name="allowed_country_ids" widget="many2many_tags" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//page[@name='lead']//field[@name='partner_name']" position="attributes">
+                    <attribute name="string">Custom Partner Name</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='lead']//field[@name='sub_city_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', allowed_sub_city_ids)]</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']//field[@name='city_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', allowed_city_ids)]</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']//field[@name='state_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', allowed_state_ids)]</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']//field[@name='country_id']" position="attributes">
+                    <attribute name="domain">[('id', 'in', allowed_country_ids)]</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_update_zones_manually" model="ir.actions.server">
+            <field name="name">Update Zones</field>
+            <field name="model_id" ref="model_crm_lead"/>
+            <field name="binding_model_id" ref="crm.model_crm_lead"/>
+            <field name="state">code</field>
+            <field name="code">
+if records:
+    records.compute_allowed_address_fields()
+            </field>
+        </record>
+
+        <record id="employee_zone_map_view_tree" model="ir.ui.view">
+            <field name="name">employee_zone_map_view_tree</field>
+            <field name="model">employee.zone.map</field>
+            <field name="arch" type="xml">
+                <tree create="0" edit="0" delete="0">
+                    <field name="crm_team_id" string="Team"/>
+                    <field name="user_id" string="Team Member"/>
+                    <field name="sub_city_ids" string="Zone" widget="many2many_tags"/>
+                    <field name="city_ids" string="Cities" widget="many2many_tags"/>
+                    <field name="state_ids" string="States" widget="many2many_tags"/>
+                    <field name="country_ids" string="Countries" widget="many2many_tags"/>
+                    <button name="show_zone_analysis" icon="fa-list" type="object"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="employee_zone_map_action" model="ir.actions.act_window">
+            <field name="name">Zone Mapping</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.zone.map</field>
+            <field name="view_mode">tree</field>
+            <field name="target">current</field>
+            <field name="context">{'group_by':'crm_team_id'}</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="employee_zone_map_menu" name="Zone Mapping" parent="crm.crm_menu_report"
+                  action="employee_zone_map_action" groups="sales_team.group_sale_salesman_all_leads,sales_team.group_sale_manager"/>
+    </data>
+</odoo>

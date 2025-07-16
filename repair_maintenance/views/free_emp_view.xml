@@ -1,74 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-	<record id="free_emp_configuration_view" model="ir.ui.view">
-		<field name="model">free.employee</field>
-		<field name="arch" type="xml">
-			<form string="Free Employee" options="{'no_create' : True}"
-				delete="false" duplicate="false" create="false" edit="false">
-				<sheet>
-					<group>
-						<field name="name" invisible="1" />
-						<h3>Search Total Free Engineer or Only Total Assigned Engineer
-							using click on below button</h3>
-						<br />
-						<button string="Search Free Engineer" name="get_free_eng"
-							type="object" class="btn-primary" />
-						<button string="Search Started Work Engineer" name="get_started_work_eng"
-                            type="object" class="btn-primary" />
-						<button string="Search only assigned Engineer" name="get_assigned_eng"
-							type="object" class="btn-primary" />
-						<br />
-					</group>
-					<group>
-						<h3>Find Engineer working history of Repair work</h3>
-						<br />
-						<button string="Only Assigned Eng" name="only_assign_eng_repair"
-							type="object" class="btn-primary" />
-						<button string="Work Started" name="started_work_repair"
-							type="object" class="btn-primary" />
-						<br />
-					</group>
-					<group>
-						<h3>Find Engineer working history of Maintenance work</h3>
-						<br />
-						<button string="Only Assigned Eng" name="only_assign_eng_maintenenance"
-							type="object" class="btn-primary" />
-						<button string="Work Started" name="started_work_maintenance"
-							type="object" class="btn-primary" />
-						<br />
-					</group>
-					<group>
-						<h3>Find Engineer working history of Project work</h3>
-						<br />
-						<button string="Only Assigned Eng" name="only_assign_eng_task"
-							type="object" class="btn-primary" />
-						<button string="Work Started" name="started_work_task"
-							type="object" class="btn-primary" />
-					</group>
-				</sheet>
-			</form>
-		</field>
-	</record>
+    <record id="free_emp_configuration_view" model="ir.ui.view">
+        <field name="model">free.employee</field>
+        <field name="arch" type="xml">
+            <form string="Free Employee" options="{'no_create' : True}"
+                  delete="false" duplicate="false" create="false" edit="false">
+                <sheet>
+                    <div>
+                        <h3>Search Total Free Engineer or Only Total Assigned Engineer
+                            using click on below button
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button string="Search Free Engineer" name="get_free_eng"
+                                    type="object" class="btn-primary"/>
+                        </div>
+                        <div class="col">
+                            <button string="Search Started Work Engineer" name="get_started_work_eng"
+                                    type="object" class="btn-primary"/>
+                        </div>
+                        <div class="col">
+                            <button string="Search only assigned Engineer" name="get_assigned_eng"
+                                    type="object" class="btn-primary"/>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div>
+                        <h3>Find Engineer working history of Repair work</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button string="Only Assigned Eng" name="only_assign_eng_repair"
+                                type="object" class="btn-primary"/>
+                        </div>
+                        <div class="col">
+                            <button string="Work Started" name="started_work_repair"
+                                type="object" class="btn-primary"/>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div>
+                        <h3>Find Engineer working history of Maintenance work</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button string="Only Assigned Eng" name="only_assign_eng_maintenenance"
+                                type="object" class="btn-primary"/>
+                        </div>
+                        <div class="col">
+                            <button string="Work Started" name="started_work_maintenance"
+                                type="object" class="btn-primary"/>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div>
+                        <h3>Find Engineer working history of Project work</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button string="Only Assigned Eng" name="only_assign_eng_task"
+                                type="object" class="btn-primary"/>
+                        </div>
+                        <div class="col">
+                            <button string="Work Started" name="started_work_task"
+                                type="object" class="btn-primary"/>
+                        </div>
+                    </div>
+
+                    <group>
+                        <field name="name" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
 
-	<record id="action_free_emp_configuration" model="ir.actions.act_window">
-		<field name="name">Free Engineer</field>
-		<field name="type">ir.actions.act_window</field>
-		<field name="res_model">free.employee</field>
-		<field name="view_mode">form</field>
-		<field name="res_id" ref="repair_maintenance.free_emp_configuration" />
-		<field name="context">{}</field>
-		<field name="domain">[]</field>
-	</record>
+    <record id="action_free_emp_configuration" model="ir.actions.act_window">
+        <field name="name">Free Engineer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">free.employee</field>
+        <field name="view_mode">form</field>
+        <field name="res_id" ref="repair_maintenance.free_emp_configuration"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
 
-	<menuitem id="menu_free_emp_conf_repair" action="action_free_emp_configuration"
-		parent="repair_maintenance.menu_repair_order_main" sequence="100" />
-		
-	<menuitem id="menu_free_emp_conf_project" action="action_free_emp_configuration"
-        parent="project.menu_main_pm" sequence="100" />
-        
+    <menuitem id="menu_free_emp_conf_repair" action="action_free_emp_configuration"
+              parent="repair_maintenance.menu_repair_order_main" sequence="100"/>
+
+    <menuitem id="menu_free_emp_conf_project" action="action_free_emp_configuration"
+              parent="project.menu_main_pm" sequence="100"/>
+
     <menuitem id="menu_free_emp_conf_maintenance" action="action_free_emp_configuration"
-        parent="maintenance.menu_maintenance_title" sequence="100" />
+              parent="maintenance.menu_maintenance_title" sequence="100"/>
 
 </odoo>

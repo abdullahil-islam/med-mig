@@ -198,8 +198,14 @@ class Repair(models.Model):
              "* The \'Done\' status is set when repairing is completed.\n"
              "* The \'Cancelled\' status is used when user cancel repair order.")
     product_id = fields.Many2one(
-        'product.product', string='Product to Repair',
+        'product.product', string='Product to Repair', domain="[('id', 'in', product_ids_allowed)]",
         readonly=True, required=True, states={'new_request': [('readonly', False)], 'draft': [('readonly', False)]})
+    product_ids_allowed = fields.Many2many(
+        'product.product',
+        compute="_compute_product_ids_allowed",
+        string="Allowed Products",
+        store=False
+    )
     invoice_method = fields.Selection([
         ("none", "No Invoice"),
         ("b4repair", "Before Repair")], string="Invoice Method",
@@ -220,6 +226,21 @@ class Repair(models.Model):
     duration_of_repair = fields.Char(string="Duration of Task", compute=calculate_duration_of_repair)
     description_work_done = fields.Html('Description of Work Done')
 
+    @api.depends('partner_id')
+    def _compute_product_ids_allowed(self):
+        for rec in self:
+            domain = [('is_equipment', '=', True), ('type', 'in', ('product', 'consu'))]
+            if rec.partner_id:
+                equipment_ids = self.env['maintenance.equipment'].sudo().search([
+                    ('partner_id', '=', rec.partner_id.id)
+                ])
+                product_ids = equipment_ids.filtered(lambda eq: eq.product_id).mapped('product_id').ids
+                if product_ids:
+                    rec.product_ids_allowed = [(6, 0, product_ids)]
+                    continue
+            # If no partner or no equipment products
+            products = self.env['product.product'].sudo().search(domain)
+            rec.product_ids_allowed = [(6, 0, products.ids)]
 
     @api.onchange('type')
     def onchange_equipment_type(self):
@@ -230,6 +251,7 @@ class Repair(models.Model):
     @api.onchange('partner_id')
     def onchange_partner(self):
         # related = 'product_id.categ_id',
+        domain = [('is_equipment', '=', True), ('type', 'in', ('product', 'consu'))]
         if self.partner_id:
             self.street = self.partner_id.street
             self.street2 = self.partner_id.street2
@@ -237,6 +259,9 @@ class Repair(models.Model):
             self.city = self.partner_id.city
             self.state_id = self.partner_id.state_id and self.partner_id.state_id.id or ''
             self.country_id = self.partner_id.country_id and self.partner_id.country_id.id or ''
+
+            # Update the product_id field from here
+            self.product_id = self.product_ids_allowed[0].id if len(self.product_ids_allowed) == 1 else False
 
     @api.onchange('product_id')
     def onchange_products(self):

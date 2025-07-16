@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="email_template_repair_order_teamhead" model="mail.template">
+        <field name="name">Reminder: Repair Order Approval- Team Head</field>
+        <field name="model_id" ref="repair.model_repair_order"/>
+        <field name="subject">Approval Request for On Call Repair Order</field>
+        <field name="auto_delete" eval="False"/>
+        <field name="email_from">${(object.company_id.email)}</field>
+        <field name="body_html">
+            <![CDATA[
+                Dear ,<br/>
+                This is a reminder for repair order Approval.<br/>
+                <h3><b>Name:</b> ${object.name or ''}</h3>
+                <b>1. Customer:</b> ${object.partner_id and object.partner_id.name or ''}<br/>
+                <b>2. Product/Machine:</b> ${object.product_id and object.product_id.name or ''}<br/>
+                <b>3. Category:</b> ${object.category_id and object.category_id.name or ''}<br/>
+ 	 <b>4. Type:</b> ${object.type or ''}<br/>
+                <b>5. Validity:</b> ${object.from_date or ''} - ${object.to_date or ''}<br/>
+                <b>6. Scheduled Date:</b> ${object.scheduled_date or ''}<br/>
+                <b>7. Start Repair:</b> ${ctx.get('start_time')}<br/>
+                <b>8. End Repair:</b> ${ctx.get('end_time')}<br/>
+                <b>9. Duration of Repair:</b> ${object.duration_of_repair or ''}<br/>
+                <b>10. Responsible Engr:</b> ${','.join(object.technician_id.mapped('name'))}<br/>
+                <b>11. Support Engr:</b> ${','.join(object.inloop_ids.mapped('name'))}<br/>
+                <b>12. Team Head:</b> ${object.team_head_id and object.team_head_id.name or ''}<br/>
+                <b>13. EDE:</b> ${object.executive_engineer_id and object.executive_engineer_id.name or ''}<br/>
+                <b>14. Invoice Method:</b> ${object.invoice_method or ''}<br/>
+                <b>15. Problem Symptom Notes-1:</b> ${object.internal_notes or ''}<br/>
+	<b>16. Problem Symptom Notes-2:</b> ${object.quotation_notes or ''}<br/>
+                 <b>17. Description of Work Done:</b> ${object.x_description_work_done or ''}<br/>
+                Thanks.
+                ]]>
+        </field>
+    </record>
+
+</odoo>

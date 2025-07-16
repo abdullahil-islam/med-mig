@@ -1,0 +1,61 @@
+<odoo>
+    <record id="view_nvt_data_target_tree" model="ir.ui.view">
+        <field name="name">nvt.data.target.tree</field>
+        <field name="model">nvt.data.target</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="data_source_id"/>
+                <field name="model_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_nvt_data_target_form" model="ir.ui.view">
+        <field name="name">nvt.data.target.form</field>
+        <field name="model">nvt.data.target</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_show_query_result" type="object" class="btn-primary" string="Show Results"/>
+                    
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="data_source_id"/>
+                        <field name="allow_parcial_transaction"/>
+                        <field name="query" widget="code"/>
+                    </group>
+                    <group>
+                        <field name="origin_primary_key"/>
+                        <field name="model_id"/>
+                        <field name="target_external_id"/>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Results">
+                            <field name="result" widget="html" nolabel="1" />
+                            <button name="button_sync_data" type="object" string="Sync Data" class="oe_highlight"/>
+                        </page>
+                        <page string="Field Mapping">
+                            <field name="field_ids">
+                                <tree editable="bottom">
+                                    <field name="origin_column_type"/>
+                                    <field name="origin_column"/>
+                                    <field name="field_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

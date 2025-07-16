@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="report_sales_order_bill">
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page" style="font-size: larger;">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <h1 class="fw-bolder p-0 m-0" style="color: #0c0f52;" t-esc="company.name">MEDIONICS IMAGING LTD.</h1>
+                            <t t-set="company_address" t-value="company.partner_id.contact_address"/>
+                            <t t-if="company.mobile" t-set="company_address" t-value="company_address + '. Mobile: ' + company.mobile"/>
+                            <p class="p-0" style="margin:auto; width: 75%;" t-esc="company_address">Rangs Nasim Square, House # 48 (5th floor), Road # 16 (Old Rd 27),</p>
+                            <h3 class="p-0 m-0 mt-1 fw-bold"><span class="py-1 px-2" style="color:white; background-color: #0c0f52; border-radius: 10px;">BILL</span></h3>
+                        </div>
+                        <div style="margin: 20px 0; border: 1px solid black; padding: 5px; border-radius: 2px;">
+                            <table class="table table-borderless" style="width: 100%;">
+                                <tr>
+                                    <td width="30%">
+                                        <strong>SL No:</strong> <span t-esc="o.name"/>
+                                    </td>
+                                    <td width="30%" style="text-align: center;">
+                                        <strong>Date:</strong> <span t-esc="o.date_order.strftime('%d-%m-%Y')"/>
+                                    </td>
+                                    <td width="40%" style="text-align: right;">
+                                        <strong>Challan No:</strong>
+                                        <span t-if="len(o.picking_ids) > 0" t-esc="o.picking_ids[0].display_name"/>
+                                        <span t-else="">__________________</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <strong>Name:</strong> <span t-esc="o.partner_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <strong>Address:</strong> <span t-esc="o.partner_id.contact_address"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <strong>Purchase Order No:</strong> <span t-esc="o.ref_po_wo"/>
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <strong>Date:</strong> <span t-esc="o.ref_po_wo_date.strftime('%d-%m-%Y') if o.ref_po_wo_date else ''"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <table class="table table-borderless" style="width: 100%; border: 1px solid black;height: 650px;">
+                                <thead>
+                                    <tr style="background-color: #f2f0f0;">
+                                        <th style="border: 1px solid black; text-align: left; width: 10%;">S/L</th>
+                                        <th style="border: 1px solid black; text-align: left; width: 50%;">Description</th>
+                                        <th style="border: 1px solid black; text-align: right; width: 10%;">QTY</th>
+                                        <th style="border: 1px solid black; text-align: right; width: 15%;">Unit Price</th>
+                                        <th style="border: 1px solid black; text-align: right; width: 15%;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="height: 100%;">
+                                    <!-- Dynamic rows -->
+                                    <t t-foreach="o.order_line" t-as="line">
+                                        <tr style="width: 100%; table-layout: fixed;">
+                                            <td style="border-right: 1px solid black; text-align: left; background-color: #f2f0f0;"><t t-esc="line_index"/></td>
+                                            <td style="border-right: 1px solid black; text-align: left;"><t t-esc="line.name"/></td>
+                                            <td style="border-right: 1px solid black; text-align: right; background-color: #f2f0f0;"><t t-esc="line.product_uom_qty"/></td>
+                                            <td style="border-right: 1px solid black; text-align: right;"><t t-esc="line.price_unit"/></td>
+                                            <td style="text-align: right; background-color: #f2f0f0;"><t t-esc="line.price_subtotal"/></td>
+                                        </tr>
+                                    </t>
+                                    <!-- Empty rows to fill space -->
+                                    <t t-if="len(o.order_line) &lt; 10">
+                                        <t t-foreach="range(10 - len(o.order_line))" t-as="i">
+                                            <tr style="width: 100%; table-layout: fixed;">
+                                                <td style="border-right: 1px solid black; background-color: #f2f0f0;">&#160;</td>
+                                                <td style="border-right: 1px solid black;">&#160;</td>
+                                                <td style="border-right: 1px solid black; background-color: #f2f0f0;">&#160;</td>
+                                                <td style="border-right: 1px solid black;">&#160;</td>
+                                                <td style="background-color: #f2f0f0;">&#160;</td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr style="background-color: #f2f0f0;">
+                                        <th colspan="4" style="text-align: right; border: 1px solid black; vertical-align: middle;">Total Amount</th>
+                                        <th style="text-align: right; border: 1px solid black; vertical-align: middle;"><t t-esc="o.amount_untaxed"/></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <p>
+                                <strong>Taka (In Words):</strong>
+                                <t t-esc="o.currency_id.amount_to_text(o.amount_untaxed)"/>
+                            </p>
+                        </div>
+                        <div class="row" style="margin-top: 70px; ">
+                            <div class="col-6" style="text-align: left; padding-left:10px;">
+                                <p>Received By</p>
+                            </div>
+                            <div class="col-6" style="text-align: right; padding-right:10px;">
+                                <p>Authorized Signature</p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <record id="paperformat_a4_sale_order_bill" model="report.paperformat">
+            <field name="name">Sale Order Bill A4</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+                id="action_report_sales_order_bill"
+                model="sale.order"
+                string="Sales Order Bill"
+                report_type="qweb-pdf"
+                file="film_sale_order.report_sales_order_bill"
+                name="film_sale_order.report_sales_order_bill"
+                print_report_name="'Sales Order Bill - %s' % (object.name)"
+                paperformat="film_sale_order.paperformat_a4_sale_order_bill"
+        />
+    </data>
+</odoo>

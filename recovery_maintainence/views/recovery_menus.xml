@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Main Recovery Menu -->
+    <menuitem id="menu_recovery_root" name="Recovery" sequence="10" groups="recovery_maintainence.group_maintenance_entry_user"/>
+
+    <!-- Contacts Menu inside Recovery -->
+    <menuitem id="menu_recovery_contacts" name="Contacts" parent="menu_recovery_root" action="contacts.action_contacts"/>
+
+    <!-- Invoice Menu inside Recovery -->
+    <menuitem id="menu_recovery_invoices" name="Invoice/Bill" parent="menu_recovery_root" action="recovery_maintainence.action_invoice_tree_recovery"/>
+
+    <!-- Contacts Menu inside Recovery -->
+    <menuitem id="menu_recovery_equipments" name="Equipments" parent="menu_recovery_root" action="maintenance.hr_equipment_action"/>
+
+</odoo>

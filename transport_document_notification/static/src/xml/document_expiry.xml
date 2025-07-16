@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.ActivityMenuView" t-inherit-mode="extension">
+        <xpath expr="//*[hasclass('o_ActivityMenuView_activityGroupTitle')]" position="after">
+            <div t-if="activityGroupView.activityGroup.type == 'document_expiry'">
+                <div t-if="activityGroupView.activityGroup.total_count" t-att-data-res_model="activityGroupView.activityGroup.irModel.model" data-filter='document_expiry'
+                     t-att-data-model_name="activityGroupView.activityGroup.irModel.name" t-att-title="activityGroupView.activityGroup.irModel.name" class="float-right btn-link">
+                    Reminder: <t t-esc="activityGroupView.activityGroup.total_count"/>
+                </div>
+                <div t-if="!activityGroupView.activityGroup.total_count" class="dropdown-item-text text-center o_no_activity">
+                    <span>No Maintenance request found !!!</span>
+                </div>
+            </div>
+            <div t-if="activityGroupView.activityGroup.type == 'new_repaird_order'">
+                <div t-if="activityGroupView.activityGroup.total_count" t-att-data-res_model="activityGroupView.activityGroup.irModel.model" data-filter='new_repaird_order'
+                     t-att-data-model_name="activityGroupView.activityGroup.irModel.name" t-att-title="activityGroupView.activityGroup.irModel.name" class="float-right btn-link">
+                    New Request: <t t-esc="activityGroupView.activityGroup.total_count"/>
+                </div>
+                <div t-if="!activityGroupView.activityGroup.total_count" class="dropdown-item-text text-center o_no_activity">
+                    <span>No repair orders found !!!</span>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>

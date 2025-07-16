@@ -1,0 +1,63 @@
+<odoo>
+
+    <record id="action_nvt_data_source" model="ir.actions.act_window">
+        <field name="name">Data Sources</field>
+        <field name="res_model">nvt.data.source</field>
+        <field name="view_mode">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Data Source
+            </p>
+        </field>
+    </record>
+
+    <record id="action_nvt_data_target" model="ir.actions.act_window">
+        <field name="name">Data Targets</field>
+        <field name="res_model">nvt.data.target</field>
+        <field name="view_mode">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Data Target
+            </p>
+        </field>
+    </record>
+
+    <record id="action_nvt_data_target_field" model="ir.actions.act_window">
+        <field name="name">Data Target Field</field>
+        <field name="res_model">nvt.data.target.field</field>
+        <field name="view_mode">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Data Target Field
+            </p>
+        </field>
+    </record>
+
+    <record id="menu_nhub_data_migration" 
+    model="ir.ui.menu">
+        <field name="name">Data Migration</field>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        <field name="sequence">10</field>
+        <field name="web_icon">nvt_data_migration,static/description/icon.png</field>
+    </record>
+
+    <record id="menu_nhub_data_source" model="ir.ui.menu">
+        <field name="name">Data Source</field>
+        <field name="parent_id" ref="menu_nhub_data_migration"/>
+        <field name="action" ref="action_nvt_data_source"/>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        <field name="sequence">11</field>
+    </record>
+
+    <record id="menu_nhub_data_target" model="ir.ui.menu">
+        <field name="name">Data Target</field>
+        <field name="parent_id" ref="menu_nhub_data_migration"/>
+        <field name="action" ref="action_nvt_data_target"/>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        <field name="sequence">12</field>
+    </record>
+
+</odoo>

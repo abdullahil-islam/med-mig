@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="sale_main_reporting"
+              parent="sale.sale_menu_root"
+              name="Reporting"
+              sequence="45"/>
+
+    <record id="sale.menu_sale_report" model="ir.ui.menu">
+        <field name="parent_id" ref="sale_consmp_reprot.sale_main_reporting"/>
+        <field name="name">Sales Analysis</field>
+    </record>
+</odoo>

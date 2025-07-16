@@ -31,7 +31,7 @@ class MaintenanceEquipment(models.Model):
                                domain="[('country_id', '=?', country_id)]")
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
     # Default field for rename label.
-    partner_id = fields.Many2one('res.partner', string='Customer/Vendor Name', domain="['|',('customer_rank', '=', 1),('supplier_rank', '=', 1)]")
+    partner_id = fields.Many2one('res.partner', string='Customer/Vendor Name')
     maintenance_team_id = fields.Many2one('maintenance.team', string='Team')
     technician_user_id = fields.Many2one('res.users', string='Engineer', track_visibility='onchange', oldname='user_id')
     product_id = fields.Many2one('product.product', 'Product')
@@ -146,15 +146,15 @@ class MaintenanceEquipment(models.Model):
             result.project_id.write({'complete_project':True})
         return result
 
-    @api.model
-    def name_search(self, name='', args=None, operator='ilike', limit=100):
-        context = self._context
-        if context and context.get('machine_based_on_partner', False):
-            equipment_ids = self.env['maintenance.equipment'].search(
-                [('partner_id', '=', context.get('machine_based_on_partner'))])
-            args += [('id', 'in', equipment_ids.ids)]
-        return super(MaintenanceEquipment, self).name_search(
-            name=name, args=args, operator=operator, limit=limit)
+    # @api.model
+    # def name_search(self, name='', args=None, operator='ilike', limit=100):
+    #     context = self._context
+    #     if context and context.get('machine_based_on_partner', False):
+    #         equipment_ids = self.env['maintenance.equipment'].search(
+    #             [('partner_id', '=', context.get('machine_based_on_partner'))])
+    #         args += [('id', 'in', equipment_ids.ids)]
+    #     return super(MaintenanceEquipment, self).name_search(
+    #         name=name, args=args, operator=operator, limit=limit)
 
 
 class MaintenanceRequest(models.Model):
@@ -212,7 +212,7 @@ class MaintenanceRequest(models.Model):
     is_permanent = fields.Boolean('Is Permanent', copy=False)
     team_head_id = fields.Many2one('res.users', string='Team Head', default=lambda self: self.env.user.id or False)
     executive_engineer_id = fields.Many2one('res.users', string='EDE', default=_get_default_executives)
-    equipment_id = fields.Many2one('maintenance.equipment', string='Machine',
+    equipment_id = fields.Many2one('maintenance.equipment', string='Machine', domain="[('id', 'in', equipment_ids_allowed)]",
                                    ondelete='restrict', index=True)
     is_engineer = fields.Boolean('Is Engineer', compute='_compute_group')
     cat_id = fields.Many2one('repair.order', string='Category')
@@ -220,8 +220,25 @@ class MaintenanceRequest(models.Model):
     user_ids = fields.Many2many('res.users', string="Responsible Engr")
     tag_id = fields.Many2many('res.partner.category',related="partner_id.category_id", string="Tags")
     description_work_done = fields.Html('Description of Work Done')
-    
-    
+
+    equipment_ids_allowed = fields.Many2many(
+        'maintenance.equipment',
+        compute="_compute_equipment_ids_allowed",
+        store=False
+    )
+
+    @api.depends('partner_id')
+    def _compute_equipment_ids_allowed(self):
+        for rec in self:
+            if rec.partner_id:
+                equipments = self.env['maintenance.equipment'].sudo().search([
+                    ('partner_id', '=', rec.partner_id.id)
+                ])
+                rec.equipment_ids_allowed = [(6, 0, equipments.ids)]
+            else:
+                all_equipments = self.env['maintenance.equipment'].sudo().search([])
+                rec.equipment_ids_allowed = [(6, 0, all_equipments.ids)]
+
     @api.model
     def create(self, vals):
         ctx = self._context.copy()
@@ -330,6 +347,8 @@ class MaintenanceRequest(models.Model):
             self.city = self.partner_id.city
             self.state_id = self.partner_id.state_id and self.partner_id.state_id.id or ''
             self.country_id = self.partner_id.country_id and self.partner_id.country_id.id or ''
+
+        self.equipment_id = self.equipment_ids_allowed[0].id if len(self.equipment_ids_allowed) == 1 else False
 
     
     def document_view(self):

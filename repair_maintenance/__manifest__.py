@@ -10,7 +10,7 @@
     'website': 'https://medionicsbd.com/',
     'maintainer': 'Shams',
     'support': 'shams@medionicsbd.com',
-    'depends': ['mail', 'maintenance', 'repair', 'account', 'purchase', 'project'],
+    'depends': ['mail', 'maintenance', 'repair', 'account', 'purchase', 'project', 'sale'],
     'data': [
         'security/maintenance_security.xml',
         'security/ir.model.access.csv',
@@ -27,7 +27,7 @@
         'views/report.xml',
         'views/maintenance_view.xml',
         'views/partner_views.xml',
-        # 'views/ir_attachment_view.xml',
+        'views/ir_attachment_view.xml',
 
         'views/report_invoice.xml',
         'views/project_project_view.xml',

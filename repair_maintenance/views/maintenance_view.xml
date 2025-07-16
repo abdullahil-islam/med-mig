@@ -197,8 +197,8 @@
                     <field name="x_maintenance_end_date" readonly="1"/>
                     <field name="duration_of_task"/>
                 </xpath>
-                <xpath expr="//form/sheet/div[1]" position="after">
-                    <div class="oe_button_box" position="inside">
+                <xpath expr="//form/sheet/div[1]" position="before">
+                    <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button" name="document_view" type="object" icon="fa-folder-open">
                             <field string="Service Report" name="document_count" widget="statinfo"/>
                         </button>
@@ -237,6 +237,7 @@
                     </div>
                 </field>
                 <field name="equipment_id" position="before">
+                    <field name="equipment_ids_allowed" widget="many2many_tags" invisible="0"/>
                     <field name="partner_id" context="{'default_customer': True}"
                            attrs="{'readonly': [('is_engineer', '=', True)]}"/>
                 </field>

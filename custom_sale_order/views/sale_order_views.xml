@@ -1,0 +1,770 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="inherit_sale_order_form_view_medionics" model="ir.ui.view">
+            <field name="name">inherit_sale_order_form_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="mode">primary</field>
+            <field name="priority">45</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/button[@name='action_confirm'][last()]" position="replace">
+                    <button name="action_confirm" string="Confirm" type="object" attrs="{'invisible': ['|', ('state', 'not in', ['draft']), ('display_validate_button', '=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//form/header/field[@name='state']" position="before">
+                    <button name="hierarchy_approval"
+                        attrs="{'invisible':[('hierarchy_approval_pending','!=',True)]}" type="object"
+                        string="Approve" class="btn-primary" />
+                </xpath>
+
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="hierarchy_approval_seq" invisible="1"/>
+                    <field name="hierarchy_approval_pending" invisible="1"/>
+                    <field name="hierarchy_last_approver" invisible="0" style="color:green;"/>
+                    <field name="approval_ids" readonly="1" widget="many2many_tags" invisible="1"/>
+                    <field name="hierarchy_last_approver_id" invisible="1"/>
+                    <field name="display_validate_button" invisible="1"/>
+
+                    <field name="quotation_template_ids" string="Quotation Templates" widget="many2many_tags"/>
+
+                    <label for="bp_amount" string="BP"/>
+                    <div class="row">
+                        <div class="col-4"><field name="bp_amount"/></div>
+                        <div class="col-8 border border-success"><field name="bp_comment"/></div>
+                    </div>
+
+                    <label for="other_exp1_amount" string="Other Exp-1"/>
+                    <div class="row">
+                        <div class="col-4"><field name="other_exp1_amount"/></div>
+                        <div class="col-8 border border-success"><field name="other_exp1_comment"/></div>
+                    </div>
+
+                    <label for="other_exp2_amount" string="Other Exp-2"/>
+                    <div class="row">
+                        <div class="col-4"><field name="other_exp2_amount"/></div>
+                        <div class="col-8 border border-success"><field name="other_exp2_comment"/></div>
+                    </div>
+
+                    <label for="total_exp_amount" string="Total" style="color: red;"/>
+                    <field name="total_exp_amount" nolabel="1" style="color: red;"/>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="is_readonly_phase2" invisible="1"/>
+                    <field name="cash_price_amount" string="Cash Price" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}"/>
+                    <field name="so_advance_amount" string="Advance Payment" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}"/>
+                    <field name="so_balance_amount" string="Balance Amount" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}"/>
+                    <field name="down_payment_amount" string="Down Payment" attrs="{'invisible': [('payment_term_type', '=', 'full')]}"/>
+                    <field name="down_payment_type" string="Down Payment Received By"
+                           attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])], 'invisible': [('payment_term_type', '=', 'full')]}"/>
+                    <field name="remaining_amount" string="Rest Amount" attrs="{'invisible': [('payment_term_type', '=', 'full')]}"/>
+                    <label for="phase1_installment_no" string="Phase-1" style="width: 170px;" attrs="{'invisible': [('payment_term_type', '=', 'full')]}"/>
+                    <div attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                        <span style="font-weight: bold">  1  </span>
+                        <span style="font-weight: bold; padding-left: 15px;">  To  </span>
+                        <field name="phase1_installment_no" style="width: 15%; text-align: center"/>
+                        <span style="font-weight: bold"> Installment</span>
+                    </div>
+                    <field name="phase1_each_installment" string="Each Installment" attrs="{'invisible': [('payment_term_type', '=', 'full')]}"/>
+
+                    <label for="phase2_installment_no" string="Phase-2" attrs="{'invisible': [('payment_term_type', '=', 'full')]}"/>
+                    <div attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                        <field name="phase2_init_installment_no" readonly="1" style="font-weight: bold; width: 10%;"/>
+                        <span style="font-weight: bold; padding-left: 15px;">  To  </span>
+                        <field name="phase2_installment_no" attrs="{'readonly': [('is_readonly_phase2', '=', True)]}"
+                               style="width: 15%; text-align: center"/>
+                        <span style="font-weight: bold"> Installment</span>
+                    </div>
+                    <field name="phase2_each_installment" string="Each Installment"
+                           attrs="{'readonly': [('is_readonly_phase2', '=', True)], 'invisible': [('payment_term_type', '=', 'full')]}"/>
+
+                    <field name="last_installment_amount" string="Last Installment" attrs="{'invisible': [('payment_term_type', '=', 'full')]}"/>
+                    <field name="month_of_warranty"/>
+                    <field name="month_of_service_warranty"/>
+                    <field name="visible_to_user" invisible="1"/>
+                    <field name="payment_term_type" invisible="1"/>
+                    <field name="show_block1" invisible="1"/>
+                    <field name="show_block2" invisible="1"/>
+                    <field name="show_block3" invisible="1"/>
+                    <field name="show_block4" invisible="1"/>
+                    <field name="show_block5" invisible="1"/>
+                    <field name="is_readonly_sheet_values" invisible="1"/>
+                    <field name="tmp1_green_cash_price" invisible="1"/>
+                    <field name="tmp1_green_price" invisible="1"/>
+                    <field name="tmp1_green_downpaymet" invisible="1"/>
+                    <field name="tmp1_green_installment" invisible="1"/>
+                    <field name="tmp1_green_warranty" invisible="1"/>
+
+                    <field name="tmp2_green_cash_price" invisible="1"/>
+                    <field name="tmp2_green_price" invisible="1"/>
+                    <field name="tmp2_green_downpaymet" invisible="1"/>
+                    <field name="tmp2_green_installment" invisible="1"/>
+                    <field name="tmp2_green_warranty" invisible="1"/>
+
+                    <field name="tmp3_green_cash_price" invisible="1"/>
+                    <field name="tmp3_green_price" invisible="1"/>
+                    <field name="tmp3_green_downpaymet" invisible="1"/>
+                    <field name="tmp3_green_installment" invisible="1"/>
+                    <field name="tmp3_green_warranty" invisible="1"/>
+
+                    <field name="tmp4_green_cash_price" invisible="1"/>
+                    <field name="tmp4_green_price" invisible="1"/>
+                    <field name="tmp4_green_downpaymet" invisible="1"/>
+                    <field name="tmp4_green_installment" invisible="1"/>
+                    <field name="tmp4_green_warranty" invisible="1"/>
+
+                    <field name="tmp5_green_cash_price" invisible="1"/>
+                    <field name="tmp5_green_price" invisible="1"/>
+                    <field name="tmp5_green_downpaymet" invisible="1"/>
+                    <field name="tmp5_green_installment" invisible="1"/>
+                    <field name="tmp5_green_warranty" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="before">
+                    <div class="row" attrs="{'invisible': [('show_block1', '=', False)]}" style="font-size: large; font-weight: bold">
+                        <div class="col d-flex">
+                            <div><field name="all_template_name"/> <span style="font-size: large; font-weight: bold"> Total Price =&#160;</span></div>
+                            <div><field name="total_approval_sheet_price" style="font-size: large; font-weight: bold"/></div>
+                        </div>
+                    </div>
+                    <div class="row" attrs="{'invisible': [('show_block1', '=', False)]}" style="font-size: large; font-weight: bold">
+                        <div class="col d-flex">
+                            <div><field name="all_template_name"/> <span> Down Payment =&#160;</span></div>
+                            <div><field name="total_approval_sheet_downpayment"/></div>
+                        </div>
+                    </div>
+
+                    <div class="row ml-2" attrs="{'invisible': [('show_block1', '=', False)]}">
+                        <div class="col-8 border">
+                            <div class="row" style="background-color: #c5c5c5; font-weight: bold;">
+                                <div class="col border px-2">
+                                    <h2 style="line-height: 10px; padding-top: 10px;"><field name="tmp1_name"/></h2>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="background-color: #e6e6e6; font-weight: bold;">
+                                <div class="col border px-2">Parameter</div>
+                                <div groups="sales_team.group_sale_manager" class="col border px-2">As Per Policy</div>
+                                <div class="col border px-2">In Approval Sheet</div>
+                                <div class="col border px-2">Comments</div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'installment')]}">
+                                <div class="col border">Cash Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_cash_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp1_green_cash_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp1_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp1_green_cash_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp1_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="price_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'installment')]}">
+                                <div class="col border">Installment Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_policy_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp1_green_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp1_amount_total" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp1_green_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp1_amount_total" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="price_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">Down Payment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_down_payment"/></div>
+<!--                                <div class="col border"><field name="tmp1_down_payment_sheet" attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/></div>-->
+<!--                                Change The Color of the Down payment field based on the condition-->
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp1_green_downpaymet', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp1_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp1_green_downpaymet', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp1_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="down_payment_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">No. Of Installment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_no_of_installment"/></div>
+<!--                                <div class="col border"><field name="tmp1_installment_no" attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/></div>-->
+<!--                                Change The Color of the tmp1_installment_no field based on the condition-->
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp1_green_installment', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp1_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp1_green_installment', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp1_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="installment_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Advance Payment</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp1_advance_payment"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Balance Amount</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp1_balance_amount"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Warranty</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_warranty"/></div>
+<!--                                <div class="col border"><field name="tmp1_warranty_month" attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/></div>-->
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp1_green_warranty', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp1_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp1_green_warranty', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp1_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="warranty_comment1"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">UPS</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_ups"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="ups_comment1"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Transportation</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_transportation"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="transportation_comment1"/></div>
+                            </div>
+
+<!--                            <div class="row">-->
+<!--                                <div class="col border">Any Other</div>-->
+<!--                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_any_other"/></div>-->
+<!--                                <div class="col border"/>-->
+<!--                                <div class="col border"><field name="other_comment1"/></div>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="col-6"/>
+                    </div>
+
+                    <div class="row ml-2 mt-2" attrs="{'invisible': [('show_block2', '=', False)]}">
+                        <div class="col-8 border">
+                            <div class="row" style="background-color: #c5c5c5; font-weight: bold;">
+                                <div class="col border px-2">
+                                    <h2 style="line-height: 10px; padding-top: 10px;"><field name="tmp2_name"/></h2>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="background-color: #e6e6e6; font-weight: bold;">
+                                <div class="col border px-2">Parameter</div>
+                                <div groups="sales_team.group_sale_manager" class="col border px-2">As Per Policy</div>
+                                <div class="col border px-2">In Approval Sheet</div>
+                                <div class="col border px-2">Comments</div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'installment')]}">
+                                <div class="col border">Cash Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_cash_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp2_green_cash_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp2_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp2_green_cash_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp2_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="price_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'installment')]}">
+                                <div class="col border">Installment Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_policy_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp2_green_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp2_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp2_green_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp2_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border"><field name="price_comment2"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">Down Payment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_down_payment"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp2_green_downpaymet', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp2_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp2_green_downpaymet', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp2_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="down_payment_comment2"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">No. Of Installment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_no_of_installment"/></div>
+<!--                                <div class="col border"><field name="tmp2_installment_no"/></div>-->
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp2_green_installment', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp2_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp2_green_installment', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp2_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="installment_comment2"/></div>
+                            </div>
+
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Advance Payment</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp2_advance_payment"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Balance Amount</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp2_balance_amount"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Warranty</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_warranty"/></div>
+<!--                                <div class="col border"><field name="tmp2_warranty_month"/></div>-->
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp2_green_warranty', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp2_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp2_green_warranty', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp2_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="warranty_comment2"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">UPS</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_ups"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="ups_comment2"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Transportation</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_transportation"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="transportation_comment2"/></div>
+                            </div>
+<!--                            <div class="row">-->
+<!--                                <div class="col border">Any Other</div>-->
+<!--                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp2_any_other"/></div>-->
+<!--                                <div class="col border"/>-->
+<!--                                <div class="col border"><field name="other_comment2"/></div>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="col-6"/>
+                    </div>
+
+                    <div class="row ml-2 mt-2" attrs="{'invisible': [('show_block3', '=', False)]}">
+                        <div class="col-8 border">
+                            <div class="row" style="background-color: #c5c5c5; font-weight: bold;">
+                                <div class="col border px-2">
+                                    <h2 style="line-height: 10px; padding-top: 10px;"><field name="tmp3_name"/></h2>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="background-color: #e6e6e6; font-weight: bold;">
+                                <div class="col border px-2">Parameter</div>
+                                <div groups="sales_team.group_sale_manager" class="col border px-2">As Per Policy</div>
+                                <div class="col border px-2">In Approval Sheet</div>
+                                <div class="col border px-2">Comments</div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'installment')]}">
+                                <div class="col border">Cash Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_cash_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp3_green_cash_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp3_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp3_green_cash_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp3_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="price_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'installment')]}">
+                                <div class="col border">Installment Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_policy_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp3_green_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp3_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp3_green_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp3_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border"><field name="price_comment3"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">Down Payment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_down_payment"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp3_green_downpaymet', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp3_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp3_green_downpaymet', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp3_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="down_payment_comment3"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">No. Of Installment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_no_of_installment"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp3_green_installment', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp3_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp3_green_installment', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp3_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="installment_comment3"/></div>
+                            </div>
+
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Advance Payment</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp3_advance_payment"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Balance Amount</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp3_balance_amount"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Warranty</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_warranty"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp3_green_warranty', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp3_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp3_green_warranty', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp3_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="warranty_comment3"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">UPS</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_ups"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="ups_comment3"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Transportation</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_transportation"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="transportation_comment3"/></div>
+                            </div>
+<!--                            <div class="row">-->
+<!--                                <div class="col border">Any Other</div>-->
+<!--                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp3_any_other"/></div>-->
+<!--                                <div class="col border"/>-->
+<!--                                <div class="col border"><field name="other_comment3"/></div>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="col-6"/>
+                    </div>
+
+                    <div class="row ml-2 mt-2" attrs="{'invisible': [('show_block4', '=', False)]}">
+                        <div class="col-8 border">
+                            <div class="row" style="background-color: #c5c5c5; font-weight: bold;">
+                                <div class="col border px-2">
+                                    <h2 style="line-height: 10px; padding-top: 10px;"><field name="tmp4_name"/></h2>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="background-color: #e6e6e6; font-weight: bold;">
+                                <div class="col border px-2">Parameter</div>
+                                <div groups="sales_team.group_sale_manager" class="col border px-2">As Per Policy</div>
+                                <div class="col border px-2">In Approval Sheet</div>
+                                <div class="col border px-2">Comments</div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'installment')]}">
+                                <div class="col border">Cash Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_cash_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp4_green_cash_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp4_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp4_green_cash_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp4_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="price_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'installment')]}">
+                                <div class="col border">Installment Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_policy_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp4_green_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp4_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp4_green_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp4_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border"><field name="price_comment4"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">Down Payment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_down_payment"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp4_green_downpaymet', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp4_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp4_green_downpaymet', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp4_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="down_payment_comment4"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">No. Of Installment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_no_of_installment"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp4_green_installment', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp4_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp4_green_installment', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp4_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="installment_comment4"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Advance Payment</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp4_advance_payment"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Balance Amount</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp4_balance_amount"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Warranty</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_warranty"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp4_green_warranty', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp4_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp4_green_warranty', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp4_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="warranty_comment4"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">UPS</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_ups"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="ups_comment4"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Transportation</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_transportation"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="transportation_comment4"/></div>
+                            </div>
+<!--                            <div class="row">-->
+<!--                                <div class="col border">Any Other</div>-->
+<!--                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp4_any_other"/></div>-->
+<!--                                <div class="col border"/>-->
+<!--                                <div class="col border"><field name="other_comment4"/></div>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="col-6"/>
+                    </div>
+
+                    <div class="row ml-2 mt-2" attrs="{'invisible': [('show_block5', '=', False)]}">
+                        <div class="col-8 border">
+                            <div class="row" style="background-color: #c5c5c5; font-weight: bold;">
+                                <div class="col border px-2">
+                                    <h2 style="line-height: 10px; padding-top: 10px;"><field name="tmp5_name"/></h2>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="background-color: #e6e6e6; font-weight: bold;">
+                                <div class="col border px-2">Parameter</div>
+                                <div groups="sales_team.group_sale_manager" class="col border px-2">As Per Policy</div>
+                                <div class="col border px-2">In Approval Sheet</div>
+                                <div class="col border px-2">Comments</div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'installment')]}">
+                                <div class="col border">Cash Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp1_cash_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp5_green_cash_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp5_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp5_green_cash_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp5_cash_price_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="price_comment1"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'installment')]}">
+                                <div class="col border">Installment Price</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp5_policy_price"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp5_green_price', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp5_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp5_green_price', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp5_amount_total" force_save="1"/>
+                                </div>
+                                <div class="col border"><field name="price_comment5"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">Down Payment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp5_down_payment"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp5_green_downpaymet', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp5_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp5_green_downpaymet', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp5_down_payment_sheet" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="down_payment_comment5"/></div>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '=', 'full')]}">
+                                <div class="col border">No. Of Installment</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp5_no_of_installment"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp5_green_installment', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp5_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp5_green_installment', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp5_installment_no" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="installment_comment5"/></div>
+                            </div>
+
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Advance Payment</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp5_advance_payment"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row" attrs="{'invisible': [('payment_term_type', '!=', 'full')]}">
+                                <div class="col border">Balance Amount</div>
+                                <div class="col border" groups="sales_team.group_sale_manager"/>
+                                <div class="col border"><field name="tmp5_balance_amount"/></div>
+                                <div class="col border"/>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Warranty</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp5_warranty"/></div>
+                                <div class="col border" style="background-color: #CEF0A6;" attrs="{'invisible': [('tmp5_green_warranty', '=', False)]}">
+                                    <field style="background-color: #CEF0A6; color: black;" name="tmp5_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border" style="background-color: #F08888;" attrs="{'invisible': [('tmp5_green_warranty', '=', True)]}">
+                                    <field style="background-color: #F08888; color: black;" name="tmp5_warranty_month" force_save="1"
+                                           attrs="{'readonly': [('is_readonly_sheet_values', '=', True)]}"/>
+                                </div>
+                                <div class="col border"><field name="warranty_comment5"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">UPS</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp5_ups"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="ups_comment5"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col border">Transportation</div>
+                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp5_transportation"/></div>
+                                <div class="col border"/>
+                                <div class="col border"><field name="transportation_comment5"/></div>
+                            </div>
+<!--                            <div class="row">-->
+<!--                                <div class="col border">Any Other</div>-->
+<!--                                <div groups="sales_team.group_sale_manager" class="col border"><field name="tmp5_any_other"/></div>-->
+<!--                                <div class="col border"/>-->
+<!--                                <div class="col border"><field name="other_comment5"/></div>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="col-6"/>
+                    </div>
+
+                </xpath>
+
+                <xpath expr="//notebook/page[last()]" position="after">
+                    <page name="instruction" string="Instruction / Note">
+                        <field name="instruction"/>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='sale_order_template_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+<!--                <xpath expr="//field[@name='order_line']/tree/field[last()]" position="after">-->
+<!--                    <field name="quotation_template_id" invisible="1" force_save="1"/>-->
+<!--                    <field name="quotation_template_line_id" invisible="1" force_save="1"/>-->
+<!--                    <field name="is_master_product" invisible="1" force_save="1"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+<!--        Existing sale order tree inherits-->
+        <record id="medionics_view_quotation_tree" model="ir.ui.view">
+            <field name="name">medionics_view_quotation_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="visible_to_user" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="medionics_view_order_tree" model="ir.ui.view">
+            <field name="name">medionics_view_order_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="visible_to_user" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale.action_orders" model="ir.actions.act_window">
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')), ('visible_to_user', '=', True)]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('sale.view_order_tree')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('sale.view_sale_order_kanban')}),
+            (0, 0, {'view_mode': 'calendar', 'view_id': ref('sale.view_sale_order_calendar')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('sale.view_sale_order_pivot')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('sale.view_sale_order_graph')}),
+            (0, 0, {'view_mode': 'activity', 'view_id': ref('sale.sale_order_view_activity')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('custom_sale_order.inherit_sale_order_form_view_medionics')}),
+            ]"/>
+        </record>
+
+        <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+            <field name="domain">[('visible_to_user', '=', True)]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('sale.view_order_tree')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('sale.view_sale_order_kanban')}),
+            (0, 0, {'view_mode': 'calendar', 'view_id': ref('sale.view_sale_order_calendar')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('sale.view_sale_order_pivot')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('sale.view_sale_order_graph')}),
+            (0, 0, {'view_mode': 'activity', 'view_id': ref('sale.sale_order_view_activity')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('custom_sale_order.inherit_sale_order_form_view_medionics')}),
+            ]"/>
+        </record>
+    </data>
+</odoo>

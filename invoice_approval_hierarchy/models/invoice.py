@@ -46,7 +46,7 @@ class AccountMove(models.Model):
     invoice_last_approver_id = fields.Many2one('res.users')
     approval_seq = fields.Integer("Approval Sequence")
     approval_pending = fields.Boolean('Approval Pending',compute='_display_approve_button')
-    invoice_last_approver = fields.Html(string='Last Approval String', compute='_display_approve_button')
+    invoice_last_approver = fields.Html(string='Last Approval', compute='_display_approve_button')
     display_validate_button = fields.Boolean('Display Validate Button',compute='_display_approve_button')
 
     def invoice_approval(self):

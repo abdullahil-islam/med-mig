@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_yearly_report_wizard_form" model="ir.ui.view">
+        <field name="name">sale.yearly.report.wizard.form</field>
+        <field name="model">sale.yearly.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Yearly Sale Report">
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button name="action_generate_report" type="object" string="Generate Excel" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                <field name="file_data" invisible="1"/>
+                <field name="file_name" invisible="1"/>
+                <field name="file_data" filename="file_name" attrs="{'invisible': [('file_data', '=', False)]}"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_yearly_report_wizard" model="ir.actions.act_window">
+        <field name="name">Yearly Report</field>
+        <field name="res_model">sale.yearly.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_sale_yearly_report"
+              name="Yearly Report"
+              parent="sale_consmp_reprot.sale_main_reporting"
+              action="action_sale_yearly_report_wizard"
+              sequence="100"/>
+</odoo>
+

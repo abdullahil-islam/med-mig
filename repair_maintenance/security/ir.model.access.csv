@@ -31,3 +31,5 @@ access_project_task_template,project_task_template.project_task_template,model_p
 access_project_task_template_employee,project.task_template,model_project_task_template,project.group_project_user,1,0,0,0
 access_project_task_template_manager,project.task_template,model_project_task_template,project.group_project_manager,1,1,1,1
 access_free_employee,access_free_employee,model_free_employee,base.group_user,1,1,1,1
+access_repair_report_wizard,access_repair_report_wizard,model_repair_report_wizard,base.group_user,1,1,1,1
+access_maintenance_report_wizard,access_maintenance_report_wizard,model_maintenance_report_wizard,base.group_user,1,1,1,1

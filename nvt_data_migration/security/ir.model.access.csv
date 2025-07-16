@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nvt_data_source,model_nvt_data_source,nvt_data_migration.model_nvt_data_source,base.group_system,1,1,1,1
+access_nvt_data_target_field,model_nvt_data_target_field,nvt_data_migration.model_nvt_data_target_field,base.group_system,1,1,1,1
+access_nvt_data_target,model_nvt_data_target,nvt_data_migration.model_nvt_data_target,base.group_system,1,1,1,1

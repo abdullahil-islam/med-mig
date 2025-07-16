@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_a5_money_receipt" model="report.paperformat">
+            <field name="name">Money Receipt A5</field>
+            <field name="default" eval="False"/>
+            <field name="format">A5</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">85</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <template id="report_money_receipt_view">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page mt-0" style="border: 3px dashed black;">
+                            <div class="container p-2" style="color: #363636;">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h1 class="fw-bold p-0 m-0" style="letter-spacing: 1px; font-size: 40px; line-height: 45px;">Medionics Imaging Ltd.</h1>
+                                        <p class="p-0 m-0" style="letter-spacing: -1px;">Rangs Nasim Square, House # 46 (5th floor), Road # 16(Old Rd 27), Dhanmondi, Dhaka-1209.</p>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-2 border border-white" style="height: 55px;">
+                                                <div style="text-align: center; margin-top: 12px;">
+                                                    <h5 style="vertical-align: middle; margin: auto;">No.</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-10 border border-dark" style="background-color: #e6e6e6; height: 55px;">
+                                                <div style="text-align: center; margin-top: 12px;">
+                                                    <h5 style="vertical-align: middle; margin: auto; font-weight: 800;"><t t-esc="doc.name"/></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <div style="width: 80%; margin: auto; background-color: #d9d9d9; border-radius: 10px; padding: 0; border: 2px solid black;">
+                                            <h4 class="p-0 m-0" style="letter-spacing: 2px; font-weight: 900; line-height: 30px;">Money Receipt</h4>
+                                            <p class="fw-bold p-0 m-0" style="font-size: 13px; line-height: 20px;">For Cheque/D.D./ Pay Order/ Cash</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-2"/>
+                                            <div class="col-3 border border-white" style="height: 55px;">
+                                                <div style="text-align: center; margin-top: 15px;">
+                                                    <h5 style="vertical-align: middle; margin: auto; font-weight: 700; font-size: 17px;">DATE</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 border border-white" style="height: 55px;">
+                                                <div class="row border border-dark" style="background-color: #e6e6e6; text-align: center; margin-top: 12px;">
+                                                    <div  class="pt-1 col-3"><span style="font-size: 17px;" t-esc="doc.date.day"/></div>
+                                                    <div  class="pt-1 col-3" style="border-left: 1px solid black; border-right: 1px solid black;"><span style="font-size: 17px;" t-esc="doc.date.month" /></div>
+                                                    <div  class="pt-1 col-6"><span style="font-size: 17px;" t-esc="doc.date.year"/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+<!--                                Received with thanks from-->
+                                <div class="row mt-2" style="font-size: 17px;">
+                                    <div class="col-3 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px; font-weight: 600; letter-spacing: -1px;">Received with thanks from:</p>
+                                    </div>
+                                    <div class="col-9" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;" t-esc="doc.partner_id.name">Customer Name</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+<!--                                The sum of taka (in word)-->
+                                <t t-set="amount_str" t-value="amount_str_dict[str(doc.id)]"/>
+                                <div class="row mt-2" style="font-size: 17px;">
+                                    <div class="col-3 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px; font-weight: 600;">The sum of taka (in word):</p>
+                                    </div>
+                                    <div class="col-9" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;" t-esc="amount_str[0]"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2" style="font-size: 17px;">
+                                    <div class="col" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;"><t t-if="len(amount_str) > 1" t-esc="amount_str[1]"/></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+<!--                                Cheque.D.D. Pay Order/ Cash-->
+                                <div class="row mt-2" style="font-size: 17px;">
+                                    <div class="col-3 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px; letter-spacing: -1px; font-weight: 600;">Cheque.D.D. Pay Order/ Cash:</p>
+                                    </div>
+                                    <div class="col-6" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px; letter-spacing: 0px; font-weight: 600; padding-left: 15px;">Date:</p>
+                                    </div>
+                                    <div class="col-2" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;" t-esc="doc.date.strftime('%d/%m/%Y')"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2" style="font-size: 17px;">
+                                    <div class="col-1 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px;">Of</p>
+                                    </div>
+                                    <div class="col-8" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px;">Name of the Bank &amp; Branch</p>
+                                    </div>
+                                </div>
+
+<!--                                Against our bill/Quotation no-->
+                                <div class="row mt-2" style="font-size: 17px;">
+                                    <div class="col-3 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px; font-weight: 600; letter-spacing: -1px">Against our bill/Quotation no:</p>
+                                    </div>
+                                    <div class="col-6" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;" t-esc="doc.ref">Payment Memo</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-1 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px; letter-spacing: 0px; font-weight: 600; padding-left: 15px;">Date:</p>
+                                    </div>
+                                    <div class="col-2" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;" t-esc="doc.date.strftime('%d/%m/%Y')"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+<!--                                On account of-->
+                                <div class="row mt-2 mb-0" style="font-size: 17px;">
+                                    <div class="col-3 border border-white" style="height: 40px;">
+                                        <p style="margin-top: 12px; font-weight: 600;">On account of:</p>
+                                    </div>
+                                    <div class="col-9" style="height: 40px;">
+                                        <div style="height: 90%; margin-bottom: auto; border-bottom: 2px solid #575757;">
+                                            <p style="padding-left: 20px;"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="container p-2 mt-2" style="color: #363636;">
+                                <div class="row">
+                                    <div class="col-4 border border-dark" style="background-color: #e6e6e6; height: 55px;">
+                                        <div class="row">
+                                            <div class="col-2" style="margin-top: 10px; font-weight: 800; font-size: 25px;"><p style="margin-left: 5px;">TK.</p></div>
+                                            <div class="col-10" style="margin-top: 7px; font-weight: 800; font-size: 30px;"><p style="margin-left: 15px;" t-esc="doc.sale_order_price"/></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div style="width: 50%; margin: auto; text-align: center; padding: 0px; border-top: 1px solid white;">
+                                            <p style="padding: 0px; margin-top: 35px; margin-bottom: 0px; border-top: 1px solid black;">Accounts</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div style="width: 60%; margin-left: auto; text-align: center; padding: 0px; border-top: 1px solid white;">
+                                            <p style="padding: 0px; margin-top: 35px; margin-bottom: 0px; border-top: 1px solid black;">Authorised Signature</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="report_payment_money_receipt"
+                model="account.payment"
+                string="Money Receipt"
+                name="film_sale_order.report_money_receipt_view"
+                file="film_sale_order.report_money_receipt_view"
+                report_type="qweb-pdf"
+                paperformat="film_sale_order.paperformat_a5_money_receipt"
+        />
+    </data>
+</odoo>

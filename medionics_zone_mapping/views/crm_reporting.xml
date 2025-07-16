@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm.crm_menu_report" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('sales_team.group_sale_salesman_all_leads')])]"/>
+    </record>
+    <record id="crm.crm_activity_report_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+    </record>
+
+    <menuitem
+            id="crm_menu_report_executive"
+            name="Reporting EX"
+            parent="crm.crm_menu_root"
+            sequence="22"
+            groups="medionics_zone_mapping.group_crm_executive"/>
+
+    <record id="crm_opportunity_report_action_lead_executive" model="ir.actions.act_window">
+        <field name="name">Leads Analysis</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">pivot,graph,tree,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="search_view_id" ref="crm.crm_opportunity_report_view_search"/>
+        <field name="context">{'search_default_current': True, 'search_default_archived': True}</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                      (0, 0, {'view_mode': 'graph', 'view_id': ref('crm.crm_opportunity_report_view_graph_lead')}),
+                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('crm.crm_opportunity_report_view_pivot_lead')})]"/>
+        <field name="help">This report analyses the source of your leads.</field>
+    </record>
+
+    <menuitem
+            id="crm_opportunity_report_menu_lead_executive"
+            name="Leads"
+            parent="crm_menu_report_executive"
+            action="crm_opportunity_report_action_lead_executive"
+            groups="medionics_zone_mapping.group_crm_executive"
+            sequence="1"/>
+
+    <record id="crm_opportunity_report_action_executive" model="ir.actions.act_window">
+        <field name="name">Pipeline Analysis</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">pivot,graph,tree,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="search_view_id" ref="crm.crm_opportunity_report_view_search"/>
+        <field name="context">{'search_default_opportunity': True, 'search_default_current': True}</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'graph', 'view_id': ref('crm.crm_opportunity_report_view_graph')}),
+                          (0, 0, {'view_mode': 'pivot', 'view_id': ref('crm.crm_opportunity_report_view_pivot')})]"/>
+        <field name="help">Pipeline Analysis gives you an instant access to
+            your opportunities with information such as the expected revenue, planned cost,
+            missed deadlines or the number of interactions per opportunity. This report is
+            mainly used by the sales manager in order to do the periodic review with the
+            teams of the sales pipeline.
+        </field>
+    </record>
+
+    <menuitem
+            id="crm_opportunity_report_menu_executive"
+            name="Pipeline"
+            parent="crm_menu_report_executive"
+            action="crm_opportunity_report_action_executive"
+            groups="medionics_zone_mapping.group_crm_executive"
+            sequence="2"/>
+
+    <record id="crm_activity_report_action_executive" model="ir.actions.act_window">
+        <field name="name">Activities Analysis</field>
+        <field name="res_model">crm.activity.report</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="context">{'search_default_activities_my': True}</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+    </record>
+
+    <menuitem
+            id="crm_activity_report_menu_executive"
+            name="Activities"
+            groups="medionics_zone_mapping.group_crm_executive"
+            parent="crm_menu_report_executive"
+            action="crm_activity_report_action_executive"
+            sequence="3"/>
+
+    <record id="employee_zone_map_action_executive" model="ir.actions.act_window">
+        <field name="name">Zone Mapping</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.zone.map</field>
+        <field name="view_mode">tree</field>
+        <field name="target">current</field>
+        <field name="context">{'group_by':'crm_team_id'}</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+    </record>
+
+    <menuitem
+            id="employee_zone_map_menu_executive"
+            name="Zone Mapping"
+            parent="crm_menu_report_executive"
+            action="employee_zone_map_action_executive"
+            groups="medionics_zone_mapping.group_crm_executive"
+            sequence="3"/>
+</odoo>

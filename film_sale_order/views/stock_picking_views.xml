@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="inherit_view_picking_form" model="ir.ui.view">
+            <field name="name">Film ERP Stock Picking Form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="widget">res_partner_many2one</attribute>
+                    <attribute name="context">{'res_partner_search_mode': 'customer', 'show_address': 1}</attribute>
+                    <attribute name="options">{'always_reload': True}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="shipping_partner_id" string="Shipping Contact" attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')], 'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='backorder_id']" position="after">
+                    <field name="ref_po_wo"/>
+                    <field name="ref_po_wo_date"/>
+                    <field name="add_contact_person"/>
+                </xpath>
+
+                <xpath expr="//field[@name='origin']" position="replace">
+                    <field name="sale_id" invisible="1"/>
+                    <field name="origin" placeholder="e.g. PO0032" attrs="{'readonly': ['|', ('state', 'in', ['done', 'cancel']), ('sale_id', '!=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//notebook" position="after">
+                    <group>
+                        <field name="note" string="Note"
+                               placeholder="Add an internal note that will be printed on the Picking Operations sheet"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//page[@name='note']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

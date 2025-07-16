@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form_maintenance" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.maintenance</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="10"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Recovery Maintenance"
+                         string="Recovery Maintenance"
+                         data-key="recovery_maintenance">
+                        <h2>Service Bill Report Approvers</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <label for="service_bill_approver_1" string="First Approver Selection"/>
+                                    <div class="text-muted">
+                                        Select First Users To Approve Service Bill Report
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_1" class="o_light_label" string="First Approver"/>
+                                            <field name="service_bill_approver_1" class="oe_inline"/>
+                                        </div>
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_1_post" class="o_light_label" string="First Approver Designation"/>
+                                            <field name="service_bill_approver_1_post" class="oe_inline"/>
+                                        </div>
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_1_mobile" class="o_light_label" string="First Approver Mobile"/>
+                                            <field name="service_bill_approver_1_mobile" class="oe_inline"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <label for="service_bill_approver_2" string="Second Approver Selection"/>
+                                    <div class="text-muted">
+                                        Select Second Users To Approve Service Bill Report
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_2" class="o_light_label" string="Second Approver"/>
+                                            <field name="service_bill_approver_2" class="oe_inline"/>
+                                        </div>
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_2_post" class="o_light_label" string="Second Approver Designation"/>
+                                            <field name="service_bill_approver_2_post" class="oe_inline"/>
+                                        </div>
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_2_mobile" class="o_light_label" string="Second Approver Mobile"/>
+                                            <field name="service_bill_approver_2_mobile" class="oe_inline"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <label for="service_bill_approver_3" string="Third Approver Selection"/>
+                                    <div class="text-muted">
+                                        Select Third Users To Approve Service Bill Report
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_3" class="o_light_label" string="Third Approver"/>
+                                            <field name="service_bill_approver_3" class="oe_inline"/>
+                                        </div>
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_3_post" class="o_light_label" string="Third Approver Designation"/>
+                                            <field name="service_bill_approver_3_post" class="oe_inline"/>
+                                        </div>
+                                        <div class="mt16">
+                                            <label for="service_bill_approver_3_mobile" class="o_light_label" string="Third Approver Mobile"/>
+                                            <field name="service_bill_approver_3_mobile" class="oe_inline"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="check_pending_record" model="cheque.pending">
+            <field name="name">Cheque pending</field>
+        </record>
+
+    <record id="ir_cron_cheque_email" model="ir.cron">
+        <field name="name">Cheque Pending cheque email</field>
+        <field name="active" eval="True" />
+        <field name="model_id" ref="model_cheque_pending"/>
+        <field name="state">code</field>
+        <field name="code">model.get_sales_details()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">7</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+    
+    <data>
+    
+    <record id="cheque_pending_email_template" model="mail.template">
+            <field name="name">Notification: Cheque Pending Sales Order</field>
+            <field name="model_id" ref="sale_payment_custom.model_cheque_pending"/>
+            <field name="email_to">recovery@medionicsbd.com</field>
+            <field name="subject">Notification: Cheque Pending Sales Order</field>
+            <field name="auto_delete" eval="False"/>            <field name="body_html" type="html">
+            
+            <p>Dear Team,</p>
+                <br/>
+                <p>
+                Please find the below sales orders detail for the Pending Cheque from The Customer.
+                </p>
+            
+            <table class="dataframe">
+                <thead>
+                        <tr style="text-align: center; background-color:#4c4c4c; color:#FFFFFF">
+                            <th style="text-align: center;">Sales Order Numner</th>
+                            <th style="text-align: center;">Customer name</th>
+                            <th style="text-align: center;">Total Amount</th>
+                            <th style="text-align: center;">Pending Amount</th>
+                        </tr>
+                    </thead>
+                    % for row in ctx.get('sales_list'):
+                    <tr style="text-align: center; background-color:#eef0f0;">
+                        <td style="text-align: center;"> ${row.get('order')}</td>
+                        <td style="text-align: center;">${row.get('customer')}</td>
+                        <td style="text-align: center;">${row.get('total')}</td>
+                        <td style="text-align: center;">${row.get('remaining')}</td>
+                    </tr>
+                    
+                    %endfor
+                
+            </table>
+            
+            </field>
+       </record>
+        </data>
+</odoo>
