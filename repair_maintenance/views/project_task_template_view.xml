@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="project_task_assign_to_btn" model="ir.actions.server">
+        <field name="name">Assign Task</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="project.model_project_task" />
+        <field name="binding_model_id" ref="project.model_project_task" />
+        <field name="binding_view_types">tree,form</field>
+        <field name="state">code</field>
+        <field name="code">action=records.open_assign_to_wizard()</field>
+    </record>
 
     <record id="task_assign_viewtotask" model="ir.ui.view">
         <field name="name">task.wizard.assigntotask</field>
@@ -12,7 +21,7 @@
                     </group>
                 </sheet>
                 <footer>
-                    <button string="Assign Task" class="btn-primary" name="action_task_assigntotask" type="object" />
+                    <button string="Assign Task" class="btn-primary" name="action_task_assign_to_task" type="object" />
                     <button string="Cancel" class="btn-primary" special="cancel"/>
                 </footer>
             </form>
@@ -28,12 +37,12 @@
 <!--        view_mode="form"-->
 <!--        target="new"-->
 <!--    />-->
-    <record id="action_task_assigntotask" model="ir.actions.act_window">
-        <field name="name">Assign Task</field>
-        <field name="res_model">task.wizard.assigntotask</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
+<!--    <record id="action_task_assigntotask" model="ir.actions.act_window">-->
+<!--        <field name="name">Assign Task</field>-->
+<!--        <field name="res_model">task.wizard.assigntotask</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
     
     <record id="view_task_form2_inherit" model="ir.ui.view">
         <field name="model">project.task.template</field>

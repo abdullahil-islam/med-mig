@@ -183,6 +183,7 @@
             <field name="name">maintenance.request.inherit</field>
             <field name="model">maintenance.request</field>
             <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="priority" eval="30"/>
             <field name="arch" type="xml">
                 <button name="archive_equipment_request" position="before">
                     <button string="Send Email" name="action_send_mail" type="object" class="oe_highlight"/>
@@ -237,7 +238,7 @@
                     </div>
                 </field>
                 <field name="equipment_id" position="before">
-                    <field name="equipment_ids_allowed" widget="many2many_tags" invisible="0"/>
+                    <field name="equipment_ids_allowed" widget="many2many_tags" invisible="1"/>
                     <field name="partner_id" context="{'default_customer': True}"
                            attrs="{'readonly': [('is_engineer', '=', True)]}"/>
                 </field>

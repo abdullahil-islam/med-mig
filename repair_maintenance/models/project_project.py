@@ -250,27 +250,23 @@ class ProjectTask(models.Model):
                                         email_values={'email_to': ','.join(self.user_ids.mapped('email'))})
 
         return True
-    
+
     
     def write(self, vals):
         result = super(ProjectTask, self).write(vals)
-        if self.x_project_task_end_date and self.kanban_state != 'done':
-            self.kanban_state = 'done'
+        for rec in self:
+            if rec.x_project_task_end_date and rec.kanban_state != 'done':
+                rec.kanban_state = 'done'
         return result
 
-            # user_id = fields.Many2many('res.users',
-        #     string='Assigned to',
-        #     default=lambda self: self.env.uid,
-        #     index=True, track_visibility='always')  #
-#     
-#     def equipment_create(self, vals):
-#         maintenance = self.env['maintenance.equipment'].search([('active', '=', True)])
-#         for rec in self:
-#             equipment = self.env["maintenance.equipment"].create({
-#                 'name': rec.name,
-#                 'name_of_equipment': rec.project_id and rec.project_id.name_of_equipment or False,
-#                 'owner_user_id': rec.user_id.id,
-#             })
-#         return True
-
+    def open_assign_to_wizard(self):
+        return {
+            'name': 'Assign Task',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'task.wizard.assigntotask',
+            'target': 'new',
+            'view_id': self.env.ref('repair_maintenance.task_assign_viewtotask').id,
+            'context': {'active_ids': self.ids},
+        }
 
